@@ -18,7 +18,7 @@ function LockerHome() {
   const [currentFrame, setCurrentFrame] = useState(1);
   const lenisRef = useRef(null);
   const totalFrames = 350;
-  const animationSectionHeight = 7000;
+  const animationSectionHeight = 3500;
   // const aboutUsSectionRef = useRef(null);
   const homeoverlay = useRef(null);
 
