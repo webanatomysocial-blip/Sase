@@ -7,6 +7,9 @@ import Home from './pages/Home';
 import ScrollToTop from './components/ScrollToTop';
 import './css/index.css';
 import Lenis from '@studio-freight/lenis';
+// import AboutSection from '../src/components/About-section.jsx';
+import Solutions from './pages/Solutions.jsx';
+import Contact from './pages/Contact.jsx';
 
 // Global Lenis initialization
 const lenis = new Lenis({
@@ -34,7 +37,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/locker" element={<LockerRoute />} /> */}
+        <Route path="/solutions" element={<Solutions />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

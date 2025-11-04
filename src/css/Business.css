@@ -1,0 +1,189 @@
+.carousel-section {
+    background: #F9F5F0;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    position: relative;
+    flex-direction: column;
+    z-index: 10000;
+    padding: 100px 0px;
+    box-sizing: border-box;
+    margin-top: -200px;
+}
+
+.carousel-section-head-text-container {
+    padding: 0 60px 40px 60px;
+    text-align: start;
+    width: 100%;
+    /* max-width: 1200px; */
+    margin: 0 auto;
+}
+
+.carousel-slides {
+    display: flex;
+    width: 100%;
+    /* max-width: 1200px; */
+    height: 520px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.carousel-slide {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+    transition: flex 0.6s ease, filter 0.5s ease;
+    cursor: pointer;
+    z-index: 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: grayscale(100%);
+    background-color: rgb(0, 0, 0, 0.3);
+    background-blend-mode: overlay;
+    min-width: 0;
+    transition: all 0.45s ease;
+}
+
+.slide1 {
+    background-image: url('../assets//Home-images/Business-images/4.jpeg');
+    background-position: center;
+}
+
+.slide2 {
+    background-image: url('../assets/Home-images/Business-images/2.jpeg');
+     background-position:25%;
+}
+
+.slide3 {
+    background-image: url('../assets/Home-images/Squence-images/locker_01_0350.webp');
+        background-position:20%;
+        
+
+}
+
+.slide4 {
+    background-image: url('../assets/Home-images/Business-images/1.jpeg');
+   background-position: 25%;
+
+}
+
+.slide5 {
+    background-image: url('../assets/Home-images/Business-images/3.jpeg');
+     background-position:25%;
+
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 30px;
+    color: #fff;
+    z-index: 2;
+    transform: translateY(20%);
+    transition: transform 0.45s ease;
+    background: rgba(0, 0, 0, 0);
+    transition: all 0.45s ease;
+
+}
+
+.inner-box-car {
+    padding: 26px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.carousel-slide:hover {
+    flex: 1.5;
+    filter: grayscale(0%);
+    background-color: rgb(0, 0, 0, 0);
+    transition: all 0.45s ease;
+    /* background-blend-mode: overlay; */
+}
+
+.carousel-slide:hover .overlay {
+    transform: translateY(0);
+    background: #1d2951;
+    transition: all 0.45s ease;
+
+}
+
+.car-section-head,
+.car-section-para,
+.car-section-link {
+    transition: all 0.45s ease;
+}
+
+.car-section-head {
+    font-size: 1.2rem;
+    margin: 0;
+    opacity: 1;
+    transform: translateY(0);
+    text-align: left;
+    transition: all 0.45s ease;
+}
+
+.car-section-para {
+    font-size: 14px;
+    line-height: 1.3;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(20%);
+    text-align: left;
+    font-weight: 300;
+    transition: all 0.45s ease;
+    text-wrap: inherit;
+    
+}
+
+.car-section-link {
+    margin: 0;
+    opacity: 0;
+    transform: translateY(20%);
+    /* text-align: left; */
+    transition: all 0.45s ease;
+}
+
+.carousel-slide:hover .car-section-para,
+.carousel-slide:hover .car-section-link {
+
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.45s ease;
+}
+
+@media (max-width: 768px) {
+    .carousel-section {
+        padding: 50px 10px;
+    }
+
+    .carousel-section-head-text-container {
+        padding: 0 20px 20px 20px;
+    }
+
+    .carousel-slides {
+        height: 300px;
+    }
+
+    .car-section-head {
+        font-size: 1.2rem;
+    }
+
+    .car-section-para {
+        font-size: 0.85rem;
+    }
+
+    .car-section-link {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+}

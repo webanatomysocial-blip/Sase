@@ -1,7 +1,11 @@
-html {
-    scroll-behavior: auto !important;
-}
-body{
-    margin: 0;
-    padding: 0;
+.home-banner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0); /* Start fully transparent */
+  pointer-events: none; /* Allow clicks to pass through */
+  transition: none; /* Let GSAP handle animation */
 }

@@ -1,0 +1,340 @@
+
+.locker-solution-hero-section {
+    height: 60vh;
+    background-color: #F3F3F3;
+    display: flex;
+    margin-bottom: 250px;
+}
+
+.locker-hero-section-contents {
+    padding-left: 60px;
+}
+.locker-smart-section-contents {
+    padding: 60px 0px 0px 60px;
+}
+
+.locker-solution-left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 100px 60px 0px 0px;
+}
+
+.locker-solution-right {
+    width: 45%;
+    display: flex;
+    /* justify-content: center; */
+}
+
+.locker-hero-section-contents {
+    padding: 30px 60px 20px 60px;
+}
+
+.locker-solution-hero-image {
+    height: 600px;
+    width: 100%;
+    object-fit: cover;
+    /* margin-top: 150px; */
+}
+
+.locker-smart-section {
+    margin-top: 300px;
+    height: 300px;
+    background-color: #EEF7FF;
+    display: flex;
+    margin-bottom: 80px;
+}
+
+.locker-smart-left {
+    width: 50%;
+}
+
+.locker-smart-right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:-65px ;
+}
+
+.locker-solution-carousel-section {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.locker-solution-carousel {
+    display: flex;
+}
+
+.locker-carousel-left {
+    background-color: #F3F3F3;
+    width: 50%;
+    padding-bottom: 200px;
+    border-radius: 0px 230px 230px 0px;
+    z-index: 1000;
+}
+
+.locker-caorusel-section-contents {
+    padding: 100px 60px 0px 60px;
+}
+
+.locker-carousel-right {
+    height: 400px;
+    position: relative;
+    left: -120px;
+    top: 25px;
+    width: 50%;
+    background: url('../assets/Home-images/Extra-images/service-section-img.jpg');
+}
+
+.locker-carousel-image {
+    position: relative;
+    height: 350px;
+    z-index: 100000;
+    top: 15%;
+    left: -30px;
+}
+
+.locker-carousel-tabs-section {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.locker-tab-1,
+.locker-tab-2,
+.locker-tab-3,
+.locker-tab-4 {
+    display: flex;
+    align-items: flex-end;
+    height: 100px;
+    width: 100px;
+    background: url('../assets/Home-images/Extra-images/service-section-img.jpg');
+}
+
+.locker-buttons-pagination {
+    display: flex;
+    gap: 25px;
+    padding: 40px 0px 0px 30px;
+    align-items: center;
+}
+
+.locker-tab {
+    display: flex;
+    align-items: flex-end;
+    height: 150px;
+    width: 150px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    padding: 5px;
+}
+
+.locker-tab p {
+    color: white;
+    padding: 4px 23px 10px 35px;
+    font-size: 12px;
+}
+
+.locker-tab.active-tab {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+.circle-btn {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 20px;
+    transition: 0.25s;
+}
+
+.circle-btn:hover {
+    background: #000;
+    color: white;
+}
+
+.locker-carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.locker-carousel-track {
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+    width: 100%;
+}
+
+.locker-solution-carousel {
+    min-width: 100%;
+    display: flex;
+}
+
+/* ================= MOBILE FIXES ================= */
+
+@media (max-width: 800px) {
+
+    .locker-solution-hero-section {
+        height: auto;
+        flex-direction: column-reverse;
+        margin-bottom: 0px;
+        padding-bottom: 60px;
+    }
+
+    .locker-solution-hero-image {
+        height: 200px;
+        object-fit: cover;
+        margin-top: 0px;
+    }
+
+    .locker-solution-left {
+        width: 100%;
+        padding: 0px;
+    }
+
+    .locker-hero-section-contents {
+        padding: 30px 20px 20px 20px;
+    }
+
+    .locker-solution-right {
+        width: 100%;
+        padding: 30px 0px;
+    }
+
+    /* Carousel Section */
+    .locker-solution-carousel-section {
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 40px;
+    }
+
+    .locker-carousel-wrapper {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .locker-carousel-track {
+        display: flex;
+        transition: transform 0.6s ease;
+    }
+
+    .locker-solution-carousel {
+        min-width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* IMAGE FIRST */
+    .locker-carousel-right {
+        order: 1;
+        width: 100%;
+        height: auto;
+        left: 0;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none !important;
+    }
+
+    .locker-carousel-image {
+        height: 240px;
+        width: auto;
+        object-fit: contain;
+        margin-top: 10px;
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    /* CONTENT BELOW */
+    .locker-carousel-left {
+        order: 2;
+        width: 100%;
+        background-color: #F3F3F3;
+        padding: 30px 20px 80px 20px;
+        border-radius: 0;
+        text-align: center;
+    }
+
+    .locker-caorusel-section-contents {
+        padding: 0 10px;
+    }
+
+    /* TABS */
+    .locker-carousel-tabs-section {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0 10px;
+        scrollbar-width: none;
+        justify-content: flex-start;
+    }
+
+    .locker-carousel-tabs-section::-webkit-scrollbar {
+        display: none;
+    }
+
+    .locker-tab {
+        min-width: 120px;
+        height: 120px;
+        display: none !important;
+        border-radius: 12px;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .locker-tab p {
+        font-size: 11px;
+        padding: 0px 10px 10px 10px;
+    }
+
+    /* ARROWS BELOW TABS */
+    .locker-buttons-pagination {
+        width: 100%;
+        justify-content: center;
+        padding: 20px 0;
+        gap: 20px;
+    }
+
+    .circle-btn {
+        height: 40px;
+        width: 40px;
+        font-size: 18px;
+    }
+
+    /* Smart Section */
+    .locker-smart-section {
+        margin-top: 0px;
+        height: auto;
+        background-color: #EEF7FF;
+        padding: 60px 0px;
+        margin-bottom: 0px;
+        flex-direction: column-reverse;
+    }
+
+    .locker-smart-left,
+    .locker-smart-right {
+        width: 100%;
+        margin-top: 0px;
+    }
+
+    .locker-solution-smart-img{
+        height: 350px;
+    }
+
+    .locker-smart-section-contents{
+        padding: 0px 20px;
+    }
+}

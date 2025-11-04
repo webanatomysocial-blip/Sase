@@ -1,25 +1,36 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Lenis from '@studio-freight/lenis';
 import '../css/LockerHome.css';
-const imageModules = import.meta.glob('/src/assets/Home-images/Squence-images/locker_01_*.webp', { eager: true });
+import { SlArrowDown } from 'react-icons/sl';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import arrow from '../assets/Home-images/Extra-images/arrow.gif'
+
+
+gsap.registerPlugin(ScrollTrigger);
 
 function LockerHome() {
+  const buttonRef = useRef(null);
+  const bannertextRef = useRef(null);
   const canvasRef = useRef(null);
   const images = useRef([]);
   const [currentFrame, setCurrentFrame] = useState(1);
   const lenisRef = useRef(null);
   const totalFrames = 350;
-  const animationSectionHeight = 10000; // Height of animation section
-  const nextSectionHeight = 1000; // Height of next section (adjust as needed)
+  const animationSectionHeight = 7000;
+  // const aboutUsSectionRef = useRef(null);
+  const homeoverlay = useRef(null);
 
-  // Function to generate image path
+  // Generate image path
+  const imageModules = import.meta.glob('/src/assets/Home-images/Squence-images/locker_01_*.webp', { eager: true });
   const getFramePath = (frame) => {
     const paddedFrame = String(frame).padStart(4, '0');
     const module = imageModules[`/src/assets/Home-images/Squence-images/locker_01_${paddedFrame}.webp`];
     return module ? module.default : '';
   };
 
-  // Preload images and set canvas size
+  // Preload images
   useEffect(() => {
     images.current = [];
     for (let i = 1; i <= totalFrames; i++) {
@@ -27,16 +38,10 @@ function LockerHome() {
       const src = getFramePath(i);
       if (src) {
         img.src = src;
-        img.onerror = () => {
-          console.error(`Failed to load image: ${src}`);
-        };
         images.current[i] = img;
-      } else {
-        console.error(`Image path not found for frame ${i}`);
       }
     }
 
-    // Set canvas size to viewport dimensions
     const firstImage = images.current[1];
     if (firstImage && firstImage.complete) {
       updateCanvasSize();
@@ -46,11 +51,8 @@ function LockerHome() {
         updateCanvasSize();
         drawFrame(1);
       };
-      firstImage.onerror = () => {
-        console.error('Failed to load first image:', firstImage.src);
-      };
     }
-  }, []);
+  }, );
 
   // Initialize Lenis
   useEffect(() => {
@@ -64,15 +66,12 @@ function LockerHome() {
       lenisRef.current.raf(time);
       requestAnimationFrame(raf);
     }
-
     requestAnimationFrame(raf);
 
-    return () => {
-      lenisRef.current.destroy();
-    };
+    return () => lenisRef.current?.destroy();
   }, []);
 
-  // Update canvas size to viewport dimensions
+  // Canvas functions
   const updateCanvasSize = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -80,49 +79,37 @@ function LockerHome() {
     canvas.height = window.innerHeight;
   };
 
-  // Draw frame on canvas with cover effect (prioritize width)
   const drawFrame = (frame) => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || !images.current[frame]?.complete) return;
+
     const ctx = canvas.getContext('2d');
-    if (images.current[frame] && images.current[frame].complete) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const img = images.current[frame];
-      const imgAspect = img.width / img.height;
-      let drawWidth, drawHeight, offsetX, offsetY;
+    const img = images.current[frame];
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Scale image to fill width, crop height if needed
-      drawWidth = canvas.width;
-      drawHeight = canvas.width / imgAspect;
-      offsetX = 0;
-      offsetY = (canvas.height - drawHeight) / 2;
+    const imgAspect = img.width / img.height;
+    let drawWidth = canvas.width;
+    let drawHeight = canvas.width / imgAspect;
+    let offsetX = 0;
+    let offsetY = (canvas.height - drawHeight) / 2;
 
-      // If image is too short, scale to height and crop width
-      if (drawHeight < canvas.height) {
-        drawHeight = canvas.height;
-        drawWidth = canvas.height * imgAspect;
-        offsetX = (canvas.width - drawWidth) / 2;
-        offsetY = 0;
-      }
-
-      ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-    } else {
-      console.warn(`Frame ${frame} not ready or broken`);
-      ctx.fillStyle = 'red';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'white';
-      ctx.font = '20px Arial';
-      ctx.fillText(`Frame ${frame} not loaded`, 10, 50);
+    if (drawHeight < canvas.height) {
+      drawHeight = canvas.height;
+      drawWidth = canvas.height * imgAspect;
+      offsetX = (canvas.width - drawWidth) / 2;
+      offsetY = 0;
     }
+
+    ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
   };
 
-  // Handle scroll event with Lenis
+  // Handle scroll with Lenis
   const handleScroll = React.useCallback(
     ({ scroll }) => {
-      const scrollPosition = scroll;
       const maxScroll = animationSectionHeight - window.innerHeight;
-      const frame = Math.floor((scrollPosition / maxScroll) * (totalFrames - 1)) + 1;
+      const frame = Math.floor((scroll / maxScroll) * (totalFrames - 1)) + 1;
       const clampedFrame = Math.max(1, Math.min(totalFrames, frame));
+
       if (clampedFrame !== currentFrame) {
         setCurrentFrame(clampedFrame);
         requestAnimationFrame(() => drawFrame(clampedFrame));
@@ -131,49 +118,80 @@ function LockerHome() {
     [currentFrame]
   );
 
-  // Add Lenis scroll listener
+  // Lenis scroll listener + resize
   useEffect(() => {
     const lenis = lenisRef.current;
-    if (lenis) {
-      lenis.on('scroll', handleScroll);
-    }
-    window.addEventListener('resize', () => {
+    if (lenis) lenis.on('scroll', handleScroll);
+
+    const handleResize = () => {
       updateCanvasSize();
       drawFrame(currentFrame);
-    });
+    };
+    window.addEventListener('resize', handleResize);
+
     return () => {
-      if (lenis) {
-        lenis.off('scroll', handleScroll);
-      }
-      window.removeEventListener('resize', updateCanvasSize);
+      if (lenis) lenis.off('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
     };
   }, [handleScroll, currentFrame]);
 
+  // GSAP Animations
+useGSAP(() => {
+  // 1. BUTTON FADES OUT ON SCROLL DOWN (existing)
+  ScrollTrigger.create({
+    trigger: document.documentElement,
+    start: 'top top',
+    onUpdate: (self) => {
+      gsap.to(buttonRef.current, {
+        opacity: self.progress > 0 ? 0 : 1,
+        duration: 0.5,
+        ease: 'power2.out',
+      });
+      gsap.to(bannertextRef.current, {
+        opacity: self.progress > 0 ? 0 : 1,
+        duration: 0.5,
+        ease: 'power2.out',
+      });
+    },
+  });
+
+  // 2. NEW: Fade overlay to black when About section enters
+  const aboutSection = document.querySelector('.about-us-section');
+  const overlay = homeoverlay.current;
+
+  if (aboutSection && overlay) {
+    gsap.to(overlay, {
+      backgroundColor: '#F9F5F0', // solid black
+      ease: 'none',
+      scrollTrigger: {
+        trigger: aboutSection,
+        start: 'top 100%',
+        end: 'top 40%',
+        scrub: true,
+        // markers: true,
+      },
+    });
+  }
+}, [homeoverlay]); // re-run if ref changes
+
+
+
+
   return (
-    <div>
-      {/* Animation Section */}
-      <div
-        className="animation-section"
-        style={{ height: `${animationSectionHeight}px`, position: 'relative' }}
-      >
+    <>
+      {/* ANIMATION SECTION */}
+      <div className="animation-section only-windows " style={{ height: `${animationSectionHeight}px`, position: 'relative' }}>
+        <div className="home-banner-overlay" ref={homeoverlay}></div>
         <canvas ref={canvasRef} className="canvas-sticky" />
+        <a ref={buttonRef} className="scroll-button" style={{ color: 'white' }}>
+          Dive Down  <span><img src={arrow} alt="" /></span>
+        </a>
+        <h1 ref={bannertextRef} className="big-head-text-white head-top-go">"Simplify logistics, <br /> secure deliveries, and empower your <br /> property with SASE."</h1>
       </div>
-      {/* Next Section */}
-      <div
-        className="next-section"
-        style={{
-          height: `${nextSectionHeight}px`,
-          background: '#f0f0f0',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '24px',
-          color: '#333',
-        }}
-      >
-        <p>Next Section Content (Scroll here after animation)</p>
-      </div>
-    </div>
+
+      {/* ABOUT US SECTION */}
+      {/* <AboutSection ref={aboutUsSectionRef} /> */}
+    </>
   );
 }
 
