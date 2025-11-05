@@ -81,7 +81,7 @@ const AboutSection = () => {
     /* 0 → 1 : fade-in */
     middleTL.to(".middle-about-container", {
       opacity: 1,
-      zIndex: 100,
+      zIndex: 1000,
       ease: "none",
       duration: 0.15,
     });
@@ -91,9 +91,9 @@ const AboutSection = () => {
       ".middle-about-container",
       {
         // width: "100%",
-        left: "35%",
+        left: "30%",
         top: "10%",
-        scale: 0.40,
+        scale: 0.45,
         ease: "none",
         duration: 0.45,
         zIndex: 1000,
@@ -131,6 +131,7 @@ const AboutSection = () => {
         opacity: 0,
         ease: "none",
         duration: 0.05,
+        zIndex: 10,
       },
       // start the fade-out a little before the end of the timeline
       // (you can tweak the "+=0.3" gap)
@@ -299,23 +300,13 @@ const AboutSection = () => {
 
 
 
-    allgoestop.to('.left-about-container-duplicate', {
+    allgoestop.to('.allgoestop', {
       top: '-100%',
       // opacity: '0',
       // xPercent: '-50%',
 
     },)
-      .to('.left-about-container-duplicate-2', {
-        top: '-100%',
-        // opacity: '0',
-
-      }, "+=0.5")
-      .to('.left-about-container-duplicate-3', {
-        top: '-100%',
-        //  opacity: '0',
-
-      }, "+=0.5");
-
+  
 
 
     /* ---------- CLEANUP ---------- */
