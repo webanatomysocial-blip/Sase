@@ -13,7 +13,7 @@
 
 .stright-line-blue {
     height: 210px;  /* ← MATCH THIS */
-    background-color: #1d2951;
+    background-color: #165060;
     width: 2px;
 }
 
@@ -50,11 +50,11 @@
     background: #fff !important;  /* ← WHITE DOTS */
     opacity: 0.8 !important;
     margin: 0 3px !important;
-    border: 2px solid #1d2951 !important;  /* ← BLUE BORDER */
+    border: 2px solid #165060 !important;  /* ← BLUE BORDER */
 }
 
 .mySwiper1 .swiper-pagination-bullet-active {
-    background: #1d2951 !important;
+    background: #165060 !important;
     opacity: 1 !important;
     transform: scale(1.1) !important;
 }

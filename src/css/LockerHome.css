@@ -31,6 +31,7 @@
   border-radius: 5px;
   cursor: pointer;
   z-index: 100000000 !important;
+  font-size: 25px;
 }
 .scroll-button span {
   display: inline-block;
@@ -40,8 +41,8 @@
   /* margin-top: 10px; */
 }
 .scroll-button span img{
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
   rotate: 90deg;
   margin-top: 10px;
   z-index: 100000000000000000 !important;

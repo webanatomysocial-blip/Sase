@@ -93,7 +93,7 @@ body {
 .subheading-text-white {
   font-size: 18px;
   font-weight: 500;
-  color: #000000;
+  color: #ffffff;
   margin: 0;
   padding: 0;
 
@@ -131,7 +131,7 @@ padding-left: 60px;
 
 
 .find-btn {
-  /* background-color: #1d2951; */
+  /* background-color: #165060; */
   background-color: #FCE300;
   color: #000;
   text-decoration: none;
@@ -166,7 +166,7 @@ padding-left: 60px;
 
 /* Main CTA button */
 .ctaSection__button {
-  /* background-color: #1d2951; */
+  /* background-color: #165060; */
   background-color: #FCE300;
   color: #000;
   text-decoration: none;

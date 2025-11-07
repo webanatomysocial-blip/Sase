@@ -180,15 +180,25 @@ const AboutSection = () => {
     });
 
     // Animation for .left-about-container-duplicate
-    gsap.to('.left-about-container-duplicate', {
-      top: '20%',
+    const duplicateTL = gsap.timeline(
+      {
+
+      
       scrollTrigger: {
         trigger: '.about-us-section',
         start: 'top bottom',
         end: 'top 50%',
         scrub: 1,
       },
-    });
+    }
+
+    );
+    duplicateTL.to('.left-about-container-duplicate', {
+      top: '20%',
+      
+    }).to('.three-in-one-section', {
+        top: '20%',
+      })
 
     // Timeline for .left-about-container and duplicates
     const tl = gsap.timeline({
@@ -201,14 +211,17 @@ const AboutSection = () => {
       },
     });
     tl.to('.left-about-container', {
-      left: '70%',
+      left: '65%',
       opacity: '0',
       display: 'none',
-    })
+    }) .to('.three-in-one-section', {
+        opacity: '1',
+      }, '<')
+
       .to(
         '.left-about-container-duplicate',
         {
-          left: '70%',
+          left: '65%',
           opacity: '1',
         },
         '<'
@@ -216,14 +229,21 @@ const AboutSection = () => {
       .to(
         '.left-about-container-duplicate-2',
         {
-          left: '70%',
+          left: '65%',
         },
         '<'
       )
       .to(
         '.left-about-container-duplicate-3',
         {
-          left: '70%',
+          left: '65%',
+        },
+        '<'
+      )
+      .to(
+        '.three-in-one-section',
+        {
+          left: '54.5%',
         },
         '<'
       );
@@ -257,8 +277,9 @@ const AboutSection = () => {
       left: '-50%',
       opacity: '0',
     })
+      
       .to('.animation-section-2-img-comes-top', {
-        top: '15%',
+        top: '10%',
         opacity: '1',
       }, '<')
       
@@ -278,7 +299,7 @@ const AboutSection = () => {
 
       }, "<")
       .to('.animation-section-2-img-comes-top-2', {
-        top: '20%',
+        top: '15%',
         opacity: '1',
       }, "<"
 
@@ -292,7 +313,7 @@ const AboutSection = () => {
         trigger: '.animation-section-2',
         start: '100% bottom',
         end: 'bottom 10%',
-        scrub: 0.3,
+        scrub: true,
         // markers: true,
 
       },
@@ -359,7 +380,7 @@ const AboutSection = () => {
         <div className="left-about-line-container"></div>
       </div>
 
-      <div className="left-about-container-duplicate">
+      <div className="left-about-container-duplicate  allgoestop">
         <svg width="100" height="100" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_6983_3015)">
                                 <path d="M17.8281 49L26.3421 40.4864L23.5141 37.6582L14.9999 46.1718L13.4139 44.586C13.2283 44.4002 13.0079 44.2528 12.7653 44.1523C12.5226 44.0517 12.2626 43.9999 11.9999 43.9999C11.7373 43.9999 11.4772 44.0517 11.2346 44.1523C10.992 44.2528 10.7716 44.4002 10.5859 44.586L2.58595 52.586C2.40015 52.7716 2.25276 52.9921 2.1522 53.2347C2.05164 53.4773 1.99988 53.7374 1.99988 54C1.99988 54.2626 2.05164 54.5227 2.1522 54.7653C2.25276 55.0079 2.40015 55.2284 2.58595 55.414L8.58595 61.414C8.77159 61.5998 8.99202 61.7471 9.23464 61.8477C9.47726 61.9482 9.73732 62 9.99995 62C10.2626 62 10.5226 61.9482 10.7653 61.8477C11.0079 61.7471 11.2283 61.5998 11.4139 61.414L19.4139 53.414C19.5997 53.2284 19.7471 53.0079 19.8477 52.7653C19.9483 52.5227 20 52.2626 20 52C20 51.7374 19.9483 51.4773 19.8477 51.2347C19.7471 50.9921 19.5997 50.7716 19.4139 50.586L17.8281 49ZM9.99995 57.1718L6.82815 54L11.9999 48.8282L15.1717 52L9.99995 57.1718Z" fill="#F9DF37" />
@@ -376,7 +397,7 @@ const AboutSection = () => {
         <p className="para-text-white">Accept every delivery — any size, any carrier, any time. No missed packages. No storage chaos.</p>
       </div>
 
-      <div className="left-about-container-duplicate-2">
+      <div className="left-about-container-duplicate-2 allgoestop">
          <svg width="100" height="100" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_6983_3007)">
                                 <path d="M22 22V42H42V22H22ZM38 38H26V26H38V38Z" fill="#F9DF37" />
@@ -393,7 +414,7 @@ const AboutSection = () => {
         <p className="para-text-white">Experience reliable hardware paired with powerful, user-friendly software. Real-time monitoring, analytics, and integrations keep everything under control.</p>
       </div>
 
-      <div className="left-about-container-duplicate-3">
+      <div className="left-about-container-duplicate-3 allgoestop">
        <svg width="100" height="100" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_7186_12)">
                                 <path d="M58.963 17.248L38.963 6.24804C38.6677 6.08564 38.3362 6.00049 37.9992 6.00049C37.6622 6.00049 37.3307 6.08564 37.0354 6.24804L17.0354 17.248C16.7218 17.4207 16.4603 17.6743 16.2782 17.9825C16.0961 18.2907 16 18.6421 16 19C16 19.358 16.0961 19.7094 16.2782 20.0176C16.4603 20.3257 16.7218 20.5794 17.0354 20.752L35.9992 31.1826V52.6172L29.9268 49.2786L27.9992 52.7824L37.0354 57.752C37.3306 57.9147 37.6621 58 37.9992 58C38.3362 58 38.6678 57.9147 38.963 57.752L58.963 46.752C59.2767 46.5795 59.5384 46.3259 59.7206 46.0177C59.9029 45.7095 59.9991 45.3581 59.9992 45V19C59.9991 18.642 59.9029 18.2905 59.7206 17.9824C59.5384 17.6742 59.2767 17.4206 58.963 17.248ZM37.9992 10.2832L53.8488 19L37.9992 27.7168L22.1496 19L37.9992 10.2832ZM55.9992 43.8174L39.9992 52.6174V31.1826L55.9992 22.3826V43.8174Z" fill="#F9DF37" />
@@ -409,6 +430,60 @@ const AboutSection = () => {
                         </svg>
         <h3 className="head-text-white">Unparalleled Service</h3>
         <p className="para-text-white"> From installation to ongoing support, our dedicated team ensures your locker system operates flawlessly every day.</p>
+      </div>
+
+      <div className="three-in-one-section allgoestop">
+        <div className="three-in-one-container">
+       <svg width="60" height="60" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_7186_12)">
+                                <path d="M58.963 17.248L38.963 6.24804C38.6677 6.08564 38.3362 6.00049 37.9992 6.00049C37.6622 6.00049 37.3307 6.08564 37.0354 6.24804L17.0354 17.248C16.7218 17.4207 16.4603 17.6743 16.2782 17.9825C16.0961 18.2907 16 18.6421 16 19C16 19.358 16.0961 19.7094 16.2782 20.0176C16.4603 20.3257 16.7218 20.5794 17.0354 20.752L35.9992 31.1826V52.6172L29.9268 49.2786L27.9992 52.7824L37.0354 57.752C37.3306 57.9147 37.6621 58 37.9992 58C38.3362 58 38.6678 57.9147 38.963 57.752L58.963 46.752C59.2767 46.5795 59.5384 46.3259 59.7206 46.0177C59.9029 45.7095 59.9991 45.3581 59.9992 45V19C59.9991 18.642 59.9029 18.2905 59.7206 17.9824C59.5384 17.6742 59.2767 17.4206 58.963 17.248ZM37.9992 10.2832L53.8488 19L37.9992 27.7168L22.1496 19L37.9992 10.2832ZM55.9992 43.8174L39.9992 52.6174V31.1826L55.9992 22.3826V43.8174Z" fill="#ffff" />
+                                <path d="M4 32L20 32V28H4V32Z" fill="#ffff" />
+                                <path d="M8 48H24V44H8V48Z" fill="#ffff" />
+                                <path d="M12 40H28V36H12V40Z" fill="#ffff" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_7186_12">
+                                    <rect width="60" height="60" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+        <h3 className="subheading-text-white">Unparalleled Service</h3>
+        
+        </div>
+        <div className="three-in-one-container">
+        <svg width="60" height="60" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_7186_12)">
+                                <path d="M58.963 17.248L38.963 6.24804C38.6677 6.08564 38.3362 6.00049 37.9992 6.00049C37.6622 6.00049 37.3307 6.08564 37.0354 6.24804L17.0354 17.248C16.7218 17.4207 16.4603 17.6743 16.2782 17.9825C16.0961 18.2907 16 18.6421 16 19C16 19.358 16.0961 19.7094 16.2782 20.0176C16.4603 20.3257 16.7218 20.5794 17.0354 20.752L35.9992 31.1826V52.6172L29.9268 49.2786L27.9992 52.7824L37.0354 57.752C37.3306 57.9147 37.6621 58 37.9992 58C38.3362 58 38.6678 57.9147 38.963 57.752L58.963 46.752C59.2767 46.5795 59.5384 46.3259 59.7206 46.0177C59.9029 45.7095 59.9991 45.3581 59.9992 45V19C59.9991 18.642 59.9029 18.2905 59.7206 17.9824C59.5384 17.6742 59.2767 17.4206 58.963 17.248ZM37.9992 10.2832L53.8488 19L37.9992 27.7168L22.1496 19L37.9992 10.2832ZM55.9992 43.8174L39.9992 52.6174V31.1826L55.9992 22.3826V43.8174Z" fill="#ffff" />
+                                <path d="M4 32L20 32V28H4V32Z" fill="#ffff" />
+                                <path d="M8 48H24V44H8V48Z" fill="#ffff" />
+                                <path d="M12 40H28V36H12V40Z" fill="#ffff" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_7186_12">
+                                    <rect width="60" height="60" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+        <h3 className="subheading-text-white">Unparalleled Service</h3>
+      
+        </div>
+        <div className="three-in-one-container">
+        <svg width="60" height="60" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_7186_12)">
+                                <path d="M58.963 17.248L38.963 6.24804C38.6677 6.08564 38.3362 6.00049 37.9992 6.00049C37.6622 6.00049 37.3307 6.08564 37.0354 6.24804L17.0354 17.248C16.7218 17.4207 16.4603 17.6743 16.2782 17.9825C16.0961 18.2907 16 18.6421 16 19C16 19.358 16.0961 19.7094 16.2782 20.0176C16.4603 20.3257 16.7218 20.5794 17.0354 20.752L35.9992 31.1826V52.6172L29.9268 49.2786L27.9992 52.7824L37.0354 57.752C37.3306 57.9147 37.6621 58 37.9992 58C38.3362 58 38.6678 57.9147 38.963 57.752L58.963 46.752C59.2767 46.5795 59.5384 46.3259 59.7206 46.0177C59.9029 45.7095 59.9991 45.3581 59.9992 45V19C59.9991 18.642 59.9029 18.2905 59.7206 17.9824C59.5384 17.6742 59.2767 17.4206 58.963 17.248ZM37.9992 10.2832L53.8488 19L37.9992 27.7168L22.1496 19L37.9992 10.2832ZM55.9992 43.8174L39.9992 52.6174V31.1826L55.9992 22.3826V43.8174Z" fill="#ffff" />
+                                <path d="M4 32L20 32V28H4V32Z" fill="#ffff" />
+                                <path d="M8 48H24V44H8V48Z" fill="#ffff" />
+                                <path d="M12 40H28V36H12V40Z" fill="#ffff" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_7186_12">
+                                    <rect width="60" height="60" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+        <h3 className="subheading-text-white">Unparalleled Service</h3>
+       
+        </div>
       </div>
 
       {/* ---------- MAIN SECTION ---------- */}
