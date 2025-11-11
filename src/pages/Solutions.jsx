@@ -3,7 +3,12 @@ import "../css/Solutions.css";
 import { Link } from "react-router-dom";
 import { IoArrowForward, IoChevronBack, IoChevronForward } from "react-icons/io5";
 import HeroImg from '../assets/Solutions-images/Banner1.png';
-import layer from '../assets/Solutions-images/Product1.png';
+import HeroImg2 from '../assets/Home-images/Why-Choose-images/2.png';
+import layer from '../assets//Solutions-images/tabs-section/Res.jpg';
+import layer1 from '../assets/Home-images/Business-images/1.jpeg';
+import layer2 from '../assets/Home-images/Business-images/2.jpeg';
+import layer3 from '../assets/Home-images/Business-images/3.jpeg';
+import layer4 from '../assets/Home-images/Business-images/4.jpeg';
 import FAQ from '../components/FAQ.jsx';
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
@@ -29,6 +34,28 @@ const slides = [
     image: layer
   }
 ];
+
+
+
+const slideImages = [
+  {title: "Residential",
+    image : layer4
+  },
+  {
+    image : layer1,
+     title: "Corporate Office",
+
+  },
+  {
+    image : layer2,
+    title: "Library",
+  },
+  {
+    image : layer3,
+    title: "Malls",
+  },
+
+]
 
 const Solutions = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -69,6 +96,12 @@ const Solutions = () => {
         </div>
       </div>
 
+
+
+
+
+
+
       {/* CAROUSEL SECTION */}
       <div className="locker-solution-carousel-section">
         <div className="locker-carousel-wrapper">
@@ -77,7 +110,7 @@ const Solutions = () => {
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {slides.map((slide, idx) => (
-              <div className="locker-solution-carousel" key={idx}>
+              <div className="locker-solution-carousel" key={idx} style={{backgroundImage : `url(${slide.image})` }}>
                 <div className="locker-carousel-left">
                   <div className="locker-caorusel-section-contents">
                     <h1 className="head-text">{slide.title}</h1>
@@ -91,9 +124,9 @@ const Solutions = () => {
                   </div>
                 </div>
 
-                <div className="locker-carousel-right">
+                {/* <div className="locker-carousel-right" >
                   <img className="locker-carousel-image" src={slide.image} alt="" />
-                </div>
+                </div> */}
               </div>
             ))}
           </div>
@@ -101,7 +134,7 @@ const Solutions = () => {
 
         {/* TAB NAVIGATION */}
         <div className="locker-carousel-tabs-section">
-          {slides.map((slide, idx) => (
+          {slideImages.map((slide, idx) => (
             <div
               key={idx}
               className={`locker-tab ${currentIndex === idx ? "active-tab" : ""}`}
@@ -119,8 +152,14 @@ const Solutions = () => {
         </div>
       </div>
 
+
+
+
+
+
+
       {/* BOTTOM SECTION */}
-      <div className="locker-smart-section">
+      <div className="locker-smart-section-last-section">
         <div className="locker-smart-left">
           <div className="locker-smart-section-contents">
             <h1 className="head-text">The Smart Choice for Your Next Project</h1>
@@ -137,11 +176,15 @@ const Solutions = () => {
         </div>
 
         <div className="locker-smart-right">
-          <img className="locker-solution-smart-img" src={HeroImg} alt="" />
+          <img className="locker-solution-smart-img2" src={HeroImg2} alt="" />
         </div>
       </div>
 
-      <FAQ color="white" />
+
+
+
+      <FAQ background="#f7f7f7" />
+
 
 
 

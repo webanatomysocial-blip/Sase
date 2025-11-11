@@ -30,7 +30,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  z-index: 100000000 !important;
+  z-index: 1000!important;
   font-size: 25px;
 }
 .scroll-button span {
@@ -45,7 +45,7 @@
   height: 40px;
   rotate: 90deg;
   margin-top: 10px;
-  z-index: 100000000000000000 !important;
+  z-index: 1000 !important;
 }
 .head-top-go{
    position: absolute;
@@ -53,8 +53,8 @@
   top: 6%;
   left: 51%;
   height: fit-content;
-  width: fit-content;
-   z-index: 100000000000 !important;
+  width: 30%;
+   z-index: 1000 !important;
      transform: translateX(-50%);
      text-align: center;
      width: 70%;

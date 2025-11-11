@@ -13,7 +13,7 @@ export default function HomeBanneVideoSection() {
 
         const handleEnded = () => {
             video.pause(); // Already paused, but explicit
-            video.currentTime = video.duration - 0.1; // Go to last frame (avoid black flash)
+            video.currentTime = video.duration - 0.1;
         };
 
         video.addEventListener('ended', handleEnded);

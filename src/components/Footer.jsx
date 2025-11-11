@@ -57,7 +57,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <p className="para-text-white">Designed and Developed by <a style={{color: "#FCE300", textDecoration: "none"}} href="webanatomy.in">Web Anatomy</a></p>
+        <p className="para-text-white">Designed and Developed by <a style={{color: "#FCE300", textDecoration: "none"}} href="https://webanatomy.in/">Web Anatomy</a></p>
       </div>
     </footer>
   );

@@ -1,7 +1,7 @@
 .mobile-home-video-section {
     width: 100%;
     aspect-ratio: 16 / 9; /* Adjust to your video's ratio */
-    background-color: #F9F5F0;
+     background-color: #fff5ea;
     /* overflow: hidden; */
     position: relative;
 }

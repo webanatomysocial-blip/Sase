@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useRef } from "react";
 import "../css/Contact.css";
-import { Link } from "react-router-dom";
 import { IoArrowForward } from "react-icons/io5";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 
 export default function Contact() {
-     return (
+  const sendBtnRef = useRef(null);
+
+  const createRipple = (e) => {
+    const btn = sendBtnRef.current;
+    if (!btn) return;
+
+    const rect = btn.getBoundingClientRect();
+    const circle = document.createElement("span");
+    const diameter = Math.max(rect.width, rect.height);
+    const radius = diameter / 2;
+
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${e.clientX - rect.left - radius}px`;
+    circle.style.top = `${e.clientY - rect.top - radius}px`;
+    circle.classList.add("ripple");
+
+    const ripple = btn.getElementsByClassName("ripple")[0];
+    if (ripple) ripple.remove();
+
+    btn.appendChild(circle);
+  };
+
+  return (
     <>
       <Header />
       <div className="contact-wrapper">
@@ -15,21 +37,23 @@ export default function Contact() {
         <div className="contact-form">
           <h2 className="contact-heading">Contact Us</h2>
 
-          <form className="contact-grid">
-
+          <form className="contact-grid animated-form">
             <div className="form-group full">
               <label>Name</label>
               <input type="text" placeholder="First name Last name" />
+              <span className="focus-border"></span>
             </div>
 
             <div className="form-group">
               <label>Email</label>
               <input type="email" placeholder="johndoe@email.com" />
+              <span className="focus-border"></span>
             </div>
 
             <div className="form-group">
               <label>Phone</label>
               <input type="tel" placeholder="1234567890" />
+              <span className="focus-border"></span>
             </div>
 
             <div className="form-group">
@@ -66,38 +90,42 @@ export default function Contact() {
             <div className="form-group full">
               <label>Installation Location</label>
               <input type="text" placeholder="City, State/Province, Country" />
+              <span className="focus-border"></span>
             </div>
 
             <div className="form-group full">
               <label>Specific Use Case Details</label>
               <textarea placeholder="Explain your requirement..."></textarea>
+              <span className="focus-border"></span>
             </div>
-
-                 
           </form>
-           <div className="cta-wrapper-left">
-                    <Link to="/" className="find-btn">
-                      SEND
-                      <IoArrowForward className="arrow-icon" />
-                    </Link>
-          
-                  </div>
+
+          <div className="cta-wrapper-left">
+            <button
+              type="button"
+              ref={sendBtnRef}
+              className="find-btn"
+              onMouseDown={createRipple}
+            >
+              SEND
+              <IoArrowForward className="arrow-icon" />
+            </button>
+          </div>
         </div>
 
+        {/* RIGHT MAP */}
         <div className="contact-map">
           <iframe
             title="Location Map"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24149.7274647969!2d-74.01447105!3d40.70556565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a316d9f4375%3A0xdeb8947f2b937352!2sNew%20York%20City%20Hall!5e0!3m2!1sen!2sus!4v1700000000000"
             allowFullScreen=""
             loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade">
-          </iframe>
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
 
       </div>
-
       <Footer />
     </>
   );
-};
-       
+}

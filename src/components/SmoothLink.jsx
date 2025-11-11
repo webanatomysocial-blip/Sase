@@ -20,15 +20,15 @@ function SmoothLink({ to = '#', children, ...props }) {
           duration: 1,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth easing
         });
-       
+
       } else {
         console.warn('Target element not found:', targetId, 'Checking all IDs:', [...document.querySelectorAll('[id]')].map(el => el.id));
         const fallbackElement = document.querySelector(`[id="${targetId}"]`);
         if (fallbackElement) {
           lenis.scrollTo(fallbackElement, { offset: 0, duration: 1.2, easing: (t) => t });
-          
+
         } else {
-         
+
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }
       }
@@ -37,10 +37,10 @@ function SmoothLink({ to = '#', children, ...props }) {
   );
 
   useEffect(() => {
-   
+
     const anchor = anchorRef.current;
     if (anchor) {
-     
+
       anchor.addEventListener('click', handleClick);
       return () => {
         anchor.removeEventListener('click', handleClick);

@@ -285,7 +285,7 @@ const AboutSection = () => {
       
       .to('.left-about-container-duplicate-2', {
         opacity: '1',
-        top: '25%',
+        top: '20%',
 
       }, "<")
       .to('.animation-section-2-img-comes-top', {
@@ -295,7 +295,7 @@ const AboutSection = () => {
      
       .to('.left-about-container-duplicate-3', {
         opacity: '1',
-        top: '25%',
+        top: '20%',
 
       }, "<")
       .to('.animation-section-2-img-comes-top-2', {
@@ -447,7 +447,7 @@ const AboutSection = () => {
                                 </clipPath>
                             </defs>
                         </svg>
-        <h3 className="subheading-text-white">Unparalleled Service</h3>
+        <h3 className="subheading-text-white">100% Package Acceptance</h3>
         
         </div>
         <div className="three-in-one-container">
@@ -464,7 +464,8 @@ const AboutSection = () => {
                                 </clipPath>
                             </defs>
                         </svg>
-        <h3 className="subheading-text-white">Unparalleled Service</h3>
+        <h3 className="subheading-text-white">Best-in-Class Technology
+</h3>
       
         </div>
         <div className="three-in-one-container">

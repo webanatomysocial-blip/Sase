@@ -82,7 +82,7 @@ const Header = () => {
           <li><Link to="/">Locker Types</Link></li>
           <li><Link to="/">About Us</Link></li>
           <li><Link to="/contact">Contact Us</Link></li>
-          <li><Link to="/">Login</Link></li>
+          <li><a href="https://test.thesase.tech/login">Login</a></li>
         </ul>
 
         <div className="cta-wrapper">

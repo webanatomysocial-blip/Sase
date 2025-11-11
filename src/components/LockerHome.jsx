@@ -5,14 +5,15 @@ import { SlArrowDown } from 'react-icons/sl';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import arrow from '../assets/Home-images/Extra-images/arrow.gif'
+import arrow from '../assets/Home-images/Extra-images/arrow.gif';
+import VariableProximity from './VariableProximity';
 
 
 gsap.registerPlugin(ScrollTrigger);
 
 function LockerHome() {
   const buttonRef = useRef(null);
-  const bannertextRef = useRef(null);
+  // const bannertextRef = useRef(null);
   const canvasRef = useRef(null);
   const images = useRef([]);
   const [currentFrame, setCurrentFrame] = useState(1);
@@ -52,7 +53,7 @@ function LockerHome() {
         drawFrame(1);
       };
     }
-  }, );
+  },);
 
   // Initialize Lenis
   useEffect(() => {
@@ -136,43 +137,47 @@ function LockerHome() {
   }, [handleScroll, currentFrame]);
 
   // GSAP Animations
-useGSAP(() => {
-  // 1. BUTTON FADES OUT ON SCROLL DOWN (existing)
-  ScrollTrigger.create({
-    trigger: document.documentElement,
-    start: 'top top',
-    onUpdate: (self) => {
-      gsap.to(buttonRef.current, {
-        opacity: self.progress > 0 ? 0 : 1,
-        duration: 0.5,
-        ease: 'power2.out',
-      });
-      gsap.to(bannertextRef.current, {
-        opacity: self.progress > 0 ? 0 : 1,
-        duration: 0.5,
-        ease: 'power2.out',
-      });
-    },
-  });
-
-  // 2. NEW: Fade overlay to black when About section enters
-  const aboutSection = document.querySelector('.about-us-section');
-  const overlay = homeoverlay.current;
-
-  if (aboutSection && overlay) {
-    gsap.to(overlay, {
-      backgroundColor: '#F9F5F0', // solid black
-      ease: 'none',
-      scrollTrigger: {
-        trigger: aboutSection,
-        start: 'top 100%',
-        end: 'top 40%',
-        scrub: true,
-        // markers: true,
+  useGSAP(() => {
+    // 1. BUTTON FADES OUT ON SCROLL DOWN (existing)
+    ScrollTrigger.create({
+      trigger: document.documentElement,
+      start: 'top top',
+      onUpdate: (self) => {
+        gsap.to(buttonRef.current, {
+          opacity: self.progress > 0 ? 0 : 1,
+          duration: 0.5,
+          ease: 'power2.out',
+        });
+        gsap.to(containerRef.current, {
+          opacity: self.progress > 0 ? 0 : 1,
+          duration: 0.5,
+          ease: 'power2.out',
+        });
       },
     });
-  }
-}, [homeoverlay]); // re-run if ref changes
+
+    // 2. NEW: Fade overlay to black when About section enters
+    const aboutSection = document.querySelector('.about-us-section');
+    const overlay = homeoverlay.current;
+
+    if (aboutSection && overlay) {
+      gsap.to(overlay, {
+        backgroundColor: '#F9F5F0', // solid black
+        ease: 'none',
+        scrollTrigger: {
+          trigger: aboutSection,
+          start: 'top 100%',
+          end: 'top 40%',
+          scrub: true,
+          // markers: true,
+        },
+      });
+    }
+  }, [homeoverlay]); // re-run if ref changes
+
+
+
+  const containerRef = useRef(null);
 
 
 
@@ -186,7 +191,22 @@ useGSAP(() => {
         <a ref={buttonRef} className="scroll-button" style={{ color: 'white' }}>
           Dive Down  <span><img src={arrow} alt="" /></span>
         </a>
-        <h1 ref={bannertextRef} className="big-head-text-white head-top-go">"Simplify logistics, <br /> secure deliveries, and empower your <br /> property with SASE."</h1>
+
+        {/* <h1 ref={bannertextRef} className="big-head-text-white head-top-go">"Simplify logistics, <br /> secure deliveries, and empower your <br /> property with SASE."</h1> */}
+
+        <div className='head-top-go'
+          ref={containerRef}
+        >
+          <VariableProximity
+            label={' "Simplify logistics, secure deliveries, and empower your property with SASE." '}
+            className={' head-top-go big-head-text-white'}
+            fromFontVariationSettings="'wght' 400, 'opsz' 9"
+            toFontVariationSettings="'wght' 1000, 'opsz' 40"
+            containerRef={containerRef}
+            radius={100}
+            falloff='linear'
+          />
+        </div>
       </div>
 
       {/* ABOUT US SECTION */}
