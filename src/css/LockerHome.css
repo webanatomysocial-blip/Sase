@@ -15,6 +15,17 @@
 .next-section {
   position: relative;
 }
+.logo-image-home-banner{
+  width:400px;
+  height:auto;
+   position: absolute;
+  bottom: 20px;
+  top: 70%;
+  left: 51%;
+  z-index: 1000;
+    transform: translateX(-50%);
+     
+}
 
 .scroll-button {
   position: absolute;
@@ -50,7 +61,7 @@
 .head-top-go{
    position: absolute;
   bottom: 20px;
-  top: 6%;
+  top: 5%;
   left: 51%;
   height: fit-content;
   width: 30%;

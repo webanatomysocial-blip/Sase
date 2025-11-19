@@ -1,130 +1,110 @@
-import React, { useRef } from "react";
+
 import "../css/Contact.css";
-import { IoArrowForward } from "react-icons/io5";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import ContactSection from "../components/Contact-section.jsx";
+// import HeroImg from '../assets/Solutions-images/Banner1.png';
 import { Link } from "react-router-dom";
+import { IoArrowForward } from "react-icons/io5";
+import Group from '../assets/Contact-images/Group.png';
+
+
 
 export default function Contact() {
-  const sendBtnRef = useRef(null);
 
-  const createRipple = (e) => {
-    const btn = sendBtnRef.current;
-    if (!btn) return;
 
-    const rect = btn.getBoundingClientRect();
-    const circle = document.createElement("span");
-    const diameter = Math.max(rect.width, rect.height);
-    const radius = diameter / 2;
-
-    circle.style.width = circle.style.height = `${diameter}px`;
-    circle.style.left = `${e.clientX - rect.left - radius}px`;
-    circle.style.top = `${e.clientY - rect.top - radius}px`;
-    circle.classList.add("ripple");
-
-    const ripple = btn.getElementsByClassName("ripple")[0];
-    if (ripple) ripple.remove();
-
-    btn.appendChild(circle);
-  };
 
   return (
     <>
       <Header />
-      <div className="contact-wrapper">
 
-        {/* LEFT FORM */}
-        <div className="contact-form">
-          <h2 className="contact-heading">Contact Us</h2>
 
-          <form className="contact-grid animated-form">
-            <div className="form-group full">
-              <label>Name</label>
-              <input type="text" placeholder="First name Last name" />
-              <span className="focus-border"></span>
-            </div>
+      <section className="contact-page-hero-section">
 
-            <div className="form-group">
-              <label>Email</label>
-              <input type="email" placeholder="johndoe@email.com" />
-              <span className="focus-border"></span>
-            </div>
-
-            <div className="form-group">
-              <label>Phone</label>
-              <input type="tel" placeholder="1234567890" />
-              <span className="focus-border"></span>
-            </div>
-
-            <div className="form-group">
-              <label>Your Industry</label>
-              <select>
-                <option>Select your usecase</option>
-                <option>Logistics</option>
-                <option>Retail</option>
-                <option>Fitness/Gym</option>
-                <option>Residential</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label>Estimated Units Needed</label>
-              <select>
-                <option>1–5 Systems</option>
-                <option>6–10 Systems</option>
-                <option>10+ Systems</option>
-                <option>Just One</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label>Project Timeline</label>
-              <select>
-                <option>Within 3 Months (Urgent)</option>
-                <option>3–6 Months</option>
-                <option>6–12 Months</option>
-                <option>Just Exploring Options</option>
-              </select>
-            </div>
-
-            <div className="form-group full">
-              <label>Installation Location</label>
-              <input type="text" placeholder="City, State/Province, Country" />
-              <span className="focus-border"></span>
-            </div>
-
-            <div className="form-group full">
-              <label>Specific Use Case Details</label>
-              <textarea placeholder="Explain your requirement..."></textarea>
-              <span className="focus-border"></span>
-            </div>
-          </form>
+        <div className="contact-page-solution-left">
+          <div className="contact-page-hero-section-contents">
+            <h1 className="head-text-white">Optimized Delivery and Asset Management for Every Environment.</h1>
+            <p className="para-text-white">
+              Explore how our secure, cloud-connected locker systems are transforming package handling,
+              asset control, and convenience across diverse sectors.
+            </p>
+          </div>
 
           <div className="cta-wrapper-left">
-            <button
-              type="button"
-              ref={sendBtnRef}
-              className="find-btn"
-              onMouseDown={createRipple}
-            >
-              SEND
-              <IoArrowForward className="arrow-icon" />
-            </button>
+            <Link to="/" className="find-btn">
+              Find Your Solution <IoArrowForward className="arrow-icon" />
+            </Link>
           </div>
         </div>
 
-        {/* RIGHT MAP */}
-        <div className="contact-map">
-          <iframe
-            title="Location Map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24149.7274647969!2d-74.01447105!3d40.70556565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a316d9f4375%3A0xdeb8947f2b937352!2sNew%20York%20City%20Hall!5e0!3m2!1sen!2sus!4v1700000000000"
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+        <div className="contact-page-solution-right">
+          <img className="contact-page-solution-hero-image" src={Group} alt="" />
         </div>
 
-      </div>
+      </section>
+
+
+
+      <ContactSection />
+
+
+
+
+
+
+
+      <section className="contact-map-section">
+        <div className="contact-map-section-contents-left">
+          <div className="contact-map-section-contents-left-outer">
+
+
+            <div className="contact-map-section-contents-left-inner">
+              <h1 className="head-text">Call</h1>
+              <a className="para-text" href="tel:+91 1234567890">
+                +91 1234567890
+              </a>
+            </div>
+            <div className="contact-map-section-contents-left-inner">
+              <h1 className="head-text">Our Location</h1>
+              <p className="para-text" >
+                Haksons Villas, 8-2-404, Road No.6, Green Valley, Banjara Hills, Hyderabad, Telangana 500034
+              </p>
+            </div>
+          </div>
+
+          <div className="contact-map-section-contents-left-outer">
+            <div className="contact-map-section-contents-left-inner">
+              <h1 className="head-text">Email</h1>
+              <a className="para-text" href="tel:+91 1234567890">
+                email@sase.com
+              </a>
+            </div>
+            <div className="contact-map-section-contents-left-inner">
+              <h1 className="head-text">Social Networks</h1>
+              <a className="para-text" href="tel:+91 1234567890">
+                +91 1234567890
+              </a>
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <div className="contact-map-section-contents-right">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d121796.99812957812!2d78.35156479999999!3d17.4522368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3bcb977ccdabaddd%3A0x197148ae9648cfe2!2sCCCV%2BJC%20Haksons%20Villas%2C%208-2-404%2C%20Road%20No.6%2C%20Green%20Valley%2C%20Banjara%20Hills%2C%20Hyderabad%2C%20Telangana%20500034!3m2!1d17.4216145!2d78.44361239999999!5e0!3m2!1sen!2sin!4v1763532130140!5m2!1sen!2sin"
+
+            style={{ border: 0 }}  // ← Object, not string
+            allowFullScreen=""     // ← camelCase
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="sase map"  // ← Recommended for accessibility
+          ></iframe>
+        </div>
+      </section>
+
+
       <Footer />
     </>
   );

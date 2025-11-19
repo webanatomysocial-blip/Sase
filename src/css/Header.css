@@ -36,6 +36,13 @@ body {
   margin: 0;
   padding: 0;
 }
+.small-head-text {
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
 
 .big-head-text-white {
   font-size: 50px;
@@ -82,7 +89,7 @@ body {
 }
 
 .subheading-text {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   color: #000000;
   margin: 0;
@@ -98,6 +105,24 @@ body {
   padding: 0;
 
 }
+.small-subheading-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+
+}
+
+.small-subheading-text-white {
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+
+}
+
 
 
 
@@ -285,7 +310,7 @@ padding-left: 60px;
   align-items: center;
   justify-content: space-between;
   gap: 50px;
-  width: 70%;
+  width: 80%;
   transition: all 0.4s ease-in-out;
 }
 
@@ -296,7 +321,7 @@ padding-left: 60px;
   list-style: none;
   margin: 0;
   padding: 0;
-  width: 70%;
+  width: 100%;
 }
 
 .nav-list li a {
@@ -392,7 +417,7 @@ padding-left: 60px;
   .subheading-text-white {
     font-size: 16px;
     font-weight: 500;
-    color: #000000;
+    color: #ffffff;
     margin: 0;
     padding: 0;
 
@@ -444,7 +469,7 @@ padding-left: 60px;
     align-items: end;
     justify-content: flex-start;
     gap: 30px;
-    padding: 300px 20px 50px 0px;
+    padding: 200px 20px 50px 0px;
     transform: translateY(-100%);
     opacity: 0;
     pointer-events: none;

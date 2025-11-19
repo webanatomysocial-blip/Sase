@@ -31,7 +31,7 @@ const faqs = [
   },
 ];
 
-const FAQ = ({ background }) => {
+const FAQ = (props) => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleFAQ = (index) => {
@@ -39,12 +39,12 @@ const FAQ = ({ background }) => {
   };
 
   return (
-    <div className="faq-container" style={{ background: background || 'transparent' }}>
+    <div className="faq-container" style={{ background: props.background , paddingTop: props.paddingTop  }}>
       <h2 className="head-text">Frequently Asked Questions</h2>
       {faqs.map((faq, index) => (
         <div key={index} className="faq-item">
           <div className="faq-question" onClick={() => toggleFAQ(index)}>
-            <span className="subheading-text">{faq.question}</span>
+            <span className="subheading-text" style={{fontSize: '20px', fontWeight: 'bold'}}>{faq.question}</span>
             {openIndex === index ? <FaMinus /> : <FaPlus />}
           </div>
           {openIndex === index && (

@@ -5,13 +5,19 @@ import { IoArrowForward, IoChevronBack, IoChevronForward } from "react-icons/io5
 import HeroImg from '../assets/Solutions-images/Banner1.png';
 import HeroImg2 from '../assets/Home-images/Why-Choose-images/2.png';
 import layer from '../assets//Solutions-images/tabs-section/Res.jpg';
-import layer1 from '../assets/Home-images/Business-images/1.jpeg';
+import layer1 from '../assets/Home-images/Squence-images/locker_01_0350.webp';
 import layer2 from '../assets/Home-images/Business-images/2.jpeg';
 import layer3 from '../assets/Home-images/Business-images/3.jpeg';
 import layer4 from '../assets/Home-images/Business-images/4.jpeg';
+import layer5 from '../assets/Home-images/Business-images/1.jpeg';
 import FAQ from '../components/FAQ.jsx';
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
+import VideoComponent from "../components/Video-comp.jsx";
+import Video from '../assets/Solutions-images/Sase-22.mp4'
+
+
+
 const slides = [
   {
     title: "Residential",
@@ -32,28 +38,38 @@ const slides = [
     title: "Malls",
     desc: "Offer shoppers secure pickup & parcel convenience.",
     image: layer
+  },
+  {
+    title: "Gym",
+    desc: "Securely store personal items & packages for members.",
+    image: layer
   }
 ];
 
 
 
 const slideImages = [
-  {title: "Residential",
-    image : layer4
+  {
+    title: "Residential",
+    image: layer4
   },
   {
-    image : layer1,
-     title: "Corporate Office",
+    image: layer1,
+    title: "Corporate Office",
 
   },
   {
-    image : layer2,
+    image: layer2,
     title: "Library",
   },
   {
-    image : layer3,
+    image: layer3,
     title: "Malls",
   },
+  {
+    image: layer5,
+    title: "Gym",
+  }
 
 ]
 
@@ -71,8 +87,8 @@ const Solutions = () => {
   return (
     <>
 
-    <Header />
-    
+      <Header />
+
       {/* HERO SECTION */}
       <div className="locker-solution-hero-section">
         <div className="locker-solution-left">
@@ -110,7 +126,7 @@ const Solutions = () => {
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {slides.map((slide, idx) => (
-              <div className="locker-solution-carousel" key={idx} style={{backgroundImage : `url(${slide.image})` }}>
+              <div className="locker-solution-carousel" key={idx} style={{ backgroundImage: `url(${slide.image})` }}>
                 <div className="locker-carousel-left">
                   <div className="locker-caorusel-section-contents">
                     <h1 className="head-text">{slide.title}</h1>
@@ -153,7 +169,7 @@ const Solutions = () => {
       </div>
 
 
-
+  <VideoComponent background="black" color="white" paddingTop="100px" paddingBottom="100px" video={Video} objectFit="contain" />
 
 
 
@@ -183,7 +199,7 @@ const Solutions = () => {
 
 
 
-      <FAQ background="#f7f7f7" />
+      <FAQ background="#ffffff" />
 
 
 

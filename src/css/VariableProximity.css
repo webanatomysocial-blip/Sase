@@ -2,7 +2,8 @@
 
 .variable-proximity {
   font-family: "Quantico", sans-serif;
-  width: 60%;
+  width: 65%;
+  transition: all 0.4s ease-in-out;
 }
 
 .sr-only {

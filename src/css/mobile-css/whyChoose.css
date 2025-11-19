@@ -17,7 +17,7 @@ flex-direction: column;
 .whyChoose-service-1,
 .whyChoose-service-2,
 .whyChoose-service-3 {
-    height: 400px;
+    height: 480px;
     width: 100%;
     padding: 50px;
     display: flex;

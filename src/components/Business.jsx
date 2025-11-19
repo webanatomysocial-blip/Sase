@@ -19,7 +19,7 @@ const Business = () => {
             <div className="inner-box-car">
               <h2 className="car-section-head">Residential</h2>
               <p className="car-section-para">
-                Deliver 24/7 parcel access, reduce staff workload, and eliminate missed deliveries—enhancing security, comfort, and everyday living for all residents.
+                Deliver 24/7 parcel access, reduce staff workload, <br /> and eliminate missed deliveries—enhancing security, <br /> comfort, and everyday living for all residents.
               </p>
             </div>
             <div className="cta-section car-section-link">
@@ -38,7 +38,7 @@ const Business = () => {
             <div className="inner-box-car">
               <h2 className="car-section-head">Corporate Offices</h2>
               <p className="car-section-para">
-                Streamline mail, IT assets, and deliveries with SASE lockers—bringing order, traceability, and security to every workplace for smoother operations.
+                Streamline mail, IT assets, and deliveries  <br /> with SASE lockers—bringing order, traceability, <br /> and security to every workplace for smoother operations.
               </p>
             </div>
             <div className="cta-section car-section-link">
@@ -55,7 +55,7 @@ const Business = () => {
             <div className="inner-box-car">
               <h2 className="car-section-head">Educational Institutes</h2>
               <p className="car-section-para">
-                Simplify campus logistics with secure lockers for books, devices, and packages—offering safe, self-service access to students and faculty all day.
+                Simplify campus logistics with secure lockers  <br /> for books, devices, and packages—offering safe,  <br />self-service access to students and faculty all day.
               </p>
             </div>
             <div className="cta-section car-section-link">
@@ -72,7 +72,7 @@ const Business = () => {
             <div className="inner-box-car">
               <h2 className="car-section-head">Gyms</h2>
               <p className="car-section-para">
-                Offer contactless storage and order pickup for members—providing safety, ease, and reliability while enhancing overall gym experience and trust.
+                Offer contactless storage and order pickup <br /> for members—providing safety, ease, and reliability <br />while  enhancing overall gym experience and trust.
               </p>
             </div>
             <div className="cta-section car-section-link">
@@ -89,7 +89,7 @@ const Business = () => {
             <div className="inner-box-car">
               <h2 className="car-section-head">Malls</h2>
               <p className="car-section-para">
-                Enable faster click-and-collect, returns, and storage with SASE lockers—creating a smooth, contactless, and connected retail experience for everyone.
+                Enable faster click-and-collect, returns,  <br /> and storage with SASE lockers—creating a smooth,  <br />contactless,  and connected retail experience for everyone.
               </p>
             </div>
             <div className="cta-section car-section-link">

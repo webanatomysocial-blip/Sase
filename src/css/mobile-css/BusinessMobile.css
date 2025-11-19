@@ -36,7 +36,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: #000;
+  /* background: #0000005e; */
   opacity: 0.5;
 }
 
@@ -50,6 +50,7 @@
   justify-content: space-between;
   align-items: center;
   color: #fff;
+  background-color: #00000093;
   z-index: 1;
 }
 

@@ -78,15 +78,16 @@ const Header = () => {
       {/* Navigation */}
       <nav className={`nav ${isMenuOpen ? "menu-open" : ""}`}>
         <ul className="nav-list">
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About Us</Link></li>
           <li><Link to="/Solutions">Locker Solutions</Link></li>
-          <li><Link to="/">Locker Types</Link></li>
-          <li><Link to="/">About Us</Link></li>
+          <li><Link to="/Products">Locker Types</Link></li>
           <li><Link to="/contact">Contact Us</Link></li>
           <li><a href="https://test.thesase.tech/login">Login</a></li>
         </ul>
 
         <div className="cta-wrapper">
-          <Link to="/" className="find-btn">
+          <Link to="/contact" className="find-btn">
             Find Your Solution
             <IoArrowForward className="arrow-icon" />
           </Link>

@@ -11,6 +11,8 @@ import Lenis from '@studio-freight/lenis';
 import Solutions from './pages/Solutions.jsx';
 import Contact from './pages/Contact.jsx';
 import VideoLoader from './components/LoaderVideo.jsx';   // ← NEW
+import Products from './pages/Products.jsx';
+import About from './pages/About.jsx';
 // import VideoLoader from './components/VideoLoader';   // ← NEW
 import './css/loader.css';                           // ← NEW (or put in index.css)
 
@@ -43,7 +45,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/solutions" element={<Solutions />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

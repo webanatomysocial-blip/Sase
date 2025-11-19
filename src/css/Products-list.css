@@ -1,0 +1,234 @@
+/* src/css/Products-list.css */
+
+/* -------------------------------------------------
+   1. SECTION & CONTAINER (unchanged)
+   ------------------------------------------------- */
+.products-list-section {
+    padding: 0px 0px 100px 0px;
+    background: #ffffff;
+}
+
+.products-list-container {
+    /* max-width: 1400px; */
+    margin: auto;
+    /* padding: 0 20px; */
+}
+.products-list-title{
+    padding: 0px 60px 40px 60px;
+}
+
+
+/* -------------------------------------------------
+   2. GRID – NEW LAYOUT (3-col base)
+   ------------------------------------------------- */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* always 3 logical columns */
+    /* gap: 40px; */
+    /* keep your original gap */
+}
+
+/* Span utilities – added */
+.product-card.span-1 {
+    grid-column: span 1;
+}
+
+.product-card.span-2 {
+    grid-column: span 2;
+}
+
+/* Row-reverse for the last two cards – added */
+.products-grid>.product-card:nth-child(6) {
+    grid-column: 1;
+}
+
+/* Card F */
+.products-grid>.product-card:nth-child(7) {
+    grid-column: 2 / 4;
+}
+
+/* Card G */
+
+/* -------------------------------------------------
+   3. CARD (unchanged except overflow)
+   ------------------------------------------------- */
+.product-card {
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    /* border-radius: 12px; */
+}
+
+/* -------------------------------------------------
+   4. IMAGE (unchanged)
+   ------------------------------------------------- */
+.product-image {
+    height: 300px;
+    overflow: hidden;
+    
+    
+}
+
+.locker-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: left;
+    transition: opacity 0.2s ease;
+}
+
+/* -------------------------------------------------
+   5. INFO (unchanged)
+   ------------------------------------------------- */
+.product-info {
+    padding: 20px 60px 30px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 16px; */
+}
+
+/* -------------------------------------------------
+   6. COLOR OPTIONS (unchanged)
+   ------------------------------------------------- */
+.color-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.color-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.colors {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+/* Each color + label */
+.color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+    width: 15%;
+    cursor: pointer;
+    padding-bottom: 5px;
+    border-radius: none;
+    border: 3px solid transparent;
+    /* background-color: #0F75BC; */
+}
+
+.color-swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.color-item.active {
+    border-bottom: 3px solid #0F75BC;
+}
+
+.color-name {
+    font-size: 0.75rem;
+    color: #444;
+    white-space: wrap;
+    text-align: start;
+}
+
+.color-swatch:hover {
+    transform: translateY(-2px);
+}
+
+/* -------------------------------------------------
+   7. CTA (unchanged)
+   ------------------------------------------------- */
+.quote-btn {
+    margin-top: auto;
+    padding: 12px 20px;
+    background: #ffd700;
+    border: none;
+    /* border-radius: 8px; */
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: fit-content;
+    gap: 8px;
+    color:black;
+    transition: background 0.3s;
+}
+
+.quote-btn:hover {
+    background: #e6c200;
+}
+
+.arrow {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.para-text.wide-desc {
+    width: 50%;
+}
+
+/* -------------------------------------------------
+   8. RESPONSIVE (updated for new layout)
+   ------------------------------------------------- */
+@media only screen and (max-width: 800px) {
+   .products-list-section {
+        padding-top: 60px;
+    }
+    .products-grid {
+        grid-template-columns: 1fr;
+        /* stack everything */
+    }
+
+    /* Force every card to occupy the single column */
+    .product-card.span-1,
+    .product-card.span-2,
+    .products-grid>.product-card:nth-child(6),
+    .products-grid>.product-card:nth-child(7) {
+        grid-column: 1;
+    }
+
+    .product-info {
+        padding: 20px 20px 60px 20px;
+    }
+
+    .colors {
+        gap: 20px;
+    }
+
+    .product-card {
+        background-color: transparent !important;
+    }
+
+    .product-card:nth-child(odd) {
+        background-color: #FFF5EA !important;
+    }
+
+    .product-card:nth-child(even) {
+        background-color: #ffffff !important; /* or transparent */
+    }
+    .para-text.wide-desc {
+        width: 100% !important;
+    }
+    .product-image {
+   padding-left:0px !important;
+    
+    
+}
+
+}

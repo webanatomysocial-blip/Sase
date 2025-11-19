@@ -1,0 +1,133 @@
+.products-page-banner-section{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 80px 60px;
+    background-color: #FFF5EA;
+    margin-bottom: 100px;
+}
+.products-page-banner-image-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 60px;
+    align-items: center;
+
+}
+
+.products-page-banner-image-container img{
+    width: 47%;
+}
+.products-page-banner-image-container img:first-child{
+
+    border-radius: 40px;
+}
+.products-page-banner-text-container{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+}
+.products-page-banner-left-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+}
+.products-page-banner-right-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 30%;
+    align-items: flex-end;
+    justify-content: end;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.AdvancedTechnology-section{
+    padding: 100px 60px;
+    display: flex;
+    background-color:#FFF5EA;
+    flex-direction: column;
+    gap: 50px;
+    
+
+}
+.AdvancedTechnology-cards-container{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+}
+.AdvancedTechnology-card{
+    width: 20%;
+    /* background-color: rgb(238, 238, 238); */
+  box-shadow:
+    -6px 6px 12px rgba(0, 0, 0, 0.02),   /* left  */
+     6px 6px 12px rgba(0, 0, 0, 0.02),   /* right */
+     0  12px 20px rgba(0, 0, 0, 0.02);   /* bottom */
+    padding: 20px;
+    /* border-radius: 10px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:white;
+    text-align: center;
+}
+.AdvancedTechnology-card img{
+    margin-bottom: 20px;
+}
+
+
+
+
+@media only screen and (max-width: 800px) {
+    .AdvancedTechnology-section{
+        padding: 60px 20px;
+        background-color:#fff;
+    }
+    .AdvancedTechnology-cards-container{
+        flex-direction: column;
+        gap: 30px;
+    }
+    .AdvancedTechnology-card{
+        width: 100%;
+ 
+    }
+
+    .products-page-banner-section{
+        padding: 60px 20px;
+        margin-bottom: 0px;
+        
+    }
+
+    .products-page-banner-image-container{
+        flex-direction: column;
+        align-items: start;
+        gap: 20px;
+    }
+    .products-page-banner-right-container{
+        width: 100%;
+        align-items: flex-end;
+        justify-content: end;
+    }
+    .products-page-banner-image-container img{
+    width: 100%;
+}
+}

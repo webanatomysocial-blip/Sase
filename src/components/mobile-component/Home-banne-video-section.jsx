@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import BannerVideo from '../../assets/Home-images/videos/mobile-video-banner.mp4';
+import BannerPoster from '../../assets/Home-images/Squence-images/locker_01_0001.webp';
 import '../../css/mobile-css/HomeBanneVideoSection.css';
 import { Link } from 'react-router-dom';
 import { IoArrowForward } from "react-icons/io5";
@@ -31,8 +32,9 @@ export default function HomeBanneVideoSection() {
                     autoPlay
                     muted
                     playsInline
-                    preload="auto"
+                    preload="metadata"
                     className="banner-video"
+                    poster={BannerPoster}
                 >
                     <source src={BannerVideo} type="video/mp4" />
                     Your browser does not support the video tag.

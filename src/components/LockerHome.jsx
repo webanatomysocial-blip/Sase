@@ -7,12 +7,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import arrow from '../assets/Home-images/Extra-images/arrow.gif';
 import VariableProximity from './VariableProximity';
+import Logos from '../assets/Home-images/Logo -01.png';
 
 
 gsap.registerPlugin(ScrollTrigger);
 
 function LockerHome() {
   const buttonRef = useRef(null);
+  const bannerimgRef = useRef(null);
   // const bannertextRef = useRef(null);
   const canvasRef = useRef(null);
   const images = useRef([]);
@@ -153,6 +155,11 @@ function LockerHome() {
           duration: 0.5,
           ease: 'power2.out',
         });
+        gsap.to(bannerimgRef.current, {
+          opacity: self.progress > 0 ? 0 : 1,
+          duration: 0.5,
+          ease: 'power2.out',
+        });
       },
     });
 
@@ -162,7 +169,7 @@ function LockerHome() {
 
     if (aboutSection && overlay) {
       gsap.to(overlay, {
-        backgroundColor: '#F9F5F0', // solid black
+        backgroundColor: '#FFF5EA', 
         ease: 'none',
         scrollTrigger: {
           trigger: aboutSection,
@@ -192,14 +199,13 @@ function LockerHome() {
           Dive Down  <span><img src={arrow} alt="" /></span>
         </a>
 
-        {/* <h1 ref={bannertextRef} className="big-head-text-white head-top-go">"Simplify logistics, <br /> secure deliveries, and empower your <br /> property with SASE."</h1> */}
 
         <div className='head-top-go'
           ref={containerRef}
         >
           <VariableProximity
             label={' "Simplify logistics, secure deliveries, and empower your property with SASE." '}
-            className={' head-top-go big-head-text-white'}
+            className={'head-top-go big-head-text-white'}
             fromFontVariationSettings="'wght' 400, 'opsz' 9"
             toFontVariationSettings="'wght' 1000, 'opsz' 40"
             containerRef={containerRef}
@@ -208,6 +214,7 @@ function LockerHome() {
           />
         </div>
       </div>
+        <img src={Logos} alt="Logo" className="logo-image-home-banner" ref={bannerimgRef} />
 
       {/* ABOUT US SECTION */}
       {/* <AboutSection ref={aboutUsSectionRef} /> */}

@@ -6,6 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import img from '../assets/Home-images/Extra-images/lockeropen-img.jpg';
 import { Link } from "react-router-dom";
 import { IoArrowForward } from "react-icons/io5";
+import downarrow from '../assets/Home-images/Extra-images/downarrow.gif';
+
 
 gsap.registerPlugin(ScrollTrigger); 
 
@@ -25,13 +27,17 @@ const LockPassword = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "100% bottom",
+          end: "75% bottom",
           scrub: 1,
           // markers: true,
         },
        
 
       });
+          tl.to(".down-arrow-password-section, .down-text-password-section", {
+            opacity: 1,
+      
+    })
 
       randomBoxes.forEach((box, i) => {
         // Define the next box (or null for the last one)
@@ -70,13 +76,24 @@ const LockPassword = () => {
             // ease: "power2.out"
 
           }) 
+          
+    tl.to(".down-arrow-password-section, .down-text-password-section", {
+            opacity: 0,
+      
+    } , `step${randomBoxes.length - 1}+=6`)
     }, sectionRef);
 
+
     return () => ctx.revert();
+    
   }, []);
 
   return (
     <section ref={sectionRef} className="locker-section">
+      <img src={downarrow} alt="Down Arrow" className="down-arrow-password-section"  />
+      <p className="subheading-text-white down-text-password-section">
+        Scroll Down
+      </p>
       <div className="locker-container">
         <div className="locker-box">
           {Array(9)
@@ -119,6 +136,12 @@ const LockPassword = () => {
 
 
       </div>
+
+
+
+
+      
+      
     </section>
   );
 };

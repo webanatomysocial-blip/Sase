@@ -13,51 +13,87 @@ gsap.registerPlugin(ScrollTrigger);
 
 const AboutSection = () => {
   useEffect(() => {
-    /* ---------- FRAME SETTINGS ---------- */
-    /* ---------- FRAME SETTINGS ---------- */
-    const START_FRAME = 350;
-    const END_FRAME = 210;
+      /* ---------- PRE-LOAD + CANVAS ---------- */
+let isMounted = true;
+  let canvas = null;
+  let ctx = null;
+  const frames = [];
 
-    /*  NEW: Use Vite's new URL() to resolve assets correctly  */
-    const FRAME_FORMAT = (i) => {
-      const filename = `locker_01_trans_${String(i).padStart(4, "0")}.webp`;
-      return new URL(
-        `../assets/Home-images/reverse-nobackground-locker/${filename}`,
-        import.meta.url
-      ).href;
-    };
+  const START_FRAME = 350;
+  const END_FRAME = 210;
+  const TOTAL_FRAMES = START_FRAME - END_FRAME + 1;
 
-    /* ---------- PRE-LOAD + CANVAS ---------- */
-    let frames = [];
-    let canvas = null;
-    let ctx = null;
-    let isMounted = true;
+  const FRAME_FORMAT = (i) =>
+    new URL(
+      `../assets/Home-images/reverse-nobackground-locker/locker_01_trans_${String(i).padStart(4, "0")}.webp`,
+      import.meta.url
+    ).href;
 
-    const init = async () => {
-      if (!isMounted) return;
+  // THIS IS THE KEY: Force canvas to be FULL VIEWPORT HEIGHT & WIDTH
+  const updateCanvasSize = () => {
+    if (!canvas) return;
 
-      // Load frames 350 → 210 (reverse)
-      for (let i = START_FRAME; i >= END_FRAME; i--) {
-        const img = new Image();
-        img.src = FRAME_FORMAT(i);
-        await new Promise((resolve) => {
-          img.onload = resolve;
-          img.onerror = resolve; // ignore missing frames
-        });
-        frames.push(img);
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+
+    // Make canvas fill its container completely
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+  };
+
+  const drawFrame = (index) => {
+    if (!ctx || !canvas || !frames[index]?.complete) return;
+
+    const img = frames[index];
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // CONTAIN + CENTER (perfect for transparent PNGs)
+    const scale = Math.min(
+      canvas.width / img.naturalWidth,
+      canvas.height / img.naturalHeight
+    );
+
+    const w = img.naturalWidth * scale;
+    const h = img.naturalHeight * scale;
+    const x = (canvas.width - w) / 2;
+    const y = (canvas.height - h) / 2;
+
+    ctx.drawImage(img, x, y, w, h);
+  };
+
+  // PRELOAD
+  for (let i = START_FRAME; i >= END_FRAME; i--) {
+    const img = new Image();
+    img.src = FRAME_FORMAT(i);
+    const frameIndex = START_FRAME - i;
+    frames[frameIndex] = img;
+
+    img.onload = () => {
+      if (isMounted && frameIndex === 0) {
+        updateCanvasSize();
+        drawFrame(0);
       }
-
-      canvas = document.querySelector(".middle-about-canvas");
-      if (!canvas) return;
-      ctx = canvas.getContext("2d");
-      if (!ctx) return;
-
-      const firstImg = frames[0];
-      canvas.width = firstImg.naturalWidth;
-      canvas.height = firstImg.naturalHeight;
     };
+  }
 
-    init();
+  // SETUP CANVAS
+  canvas = document.querySelector(".middle-about-canvas");
+  if (!canvas) return;
+  ctx = canvas.getContext("2d");
+  updateCanvasSize();
+
+  // RESIZE HANDLER
+  const handleResize = () => {
+    updateCanvasSize();
+    drawFrame(Math.floor(ScrollTrigger.getById("locker")?.progress * (TOTAL_FRAMES - 1) || 0));
+  };
+  window.addEventListener("resize", handleResize);
+
+   
 
     /* ---------- MIDDLE CONTAINER (canvas) ---------- */
     const middleTL = gsap.timeline({
@@ -68,11 +104,9 @@ const AboutSection = () => {
         scrub: 1,
         id: "middle-container",
         onUpdate: (self) => {
-          if (!ctx || !canvas) return;
-          const idx = Math.floor(self.progress * (frames.length - 1));
-          const img = frames[idx]; // 350 … 210
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+         const progress = self.progress;
+      const index = Math.floor(progress * (TOTAL_FRAMES - 1));
+      drawFrame(index);
         },
       },
     });
@@ -84,6 +118,7 @@ const AboutSection = () => {
       zIndex: 1000,
       ease: "none",
       duration: 0.15,
+      scale: 1,
     });
 
     /* 1 → 2 : grow + move + scale */
@@ -91,12 +126,12 @@ const AboutSection = () => {
       ".middle-about-container",
       {
         // width: "100%",
-        left: "30%",
-        top: "10%",
-        scale: 0.45,
+        left: "25%",
+        top: "14%",
+        scale: 0.65,
         ease: "none",
         duration: 0.45,
-        zIndex: 1000,
+        zIndex: 100000,
       },
       "+=0"
     );
@@ -105,10 +140,10 @@ const AboutSection = () => {
     middleTL.to(
       ".middle-about-container",
       {
-        top: "10%",
+        top: "16%",
         ease: "none",
         duration: 0.15,
-        zIndex: 1000,
+        zIndex: 100000,
       },
       ">"
     );
@@ -138,11 +173,6 @@ const AboutSection = () => {
       "+=0.2"
     )
 
-    // .to(
-    //   ".middle-about-container",{
-    //     display: "none",
-    //     duration: 0.5,
-    //   }, "+=0.5")
 
     // Animation for .outer-lock
     gsap.to('.outer-lock', {
@@ -157,14 +187,15 @@ const AboutSection = () => {
     });
 
     // Animation for .left-about-container-outer
-    gsap.to('.left-about-container-outer', {
-      background: '#F9F5F0',
+    gsap.to('.about-us-section', {
+      background: '#FFF5EA',
+      duriation:"none",
       scrollTrigger: {
         trigger: '.about-us-section',
         start: 'top 60%',
         end: 'top top',
-        scrub: true,
-        // toggleActions: 'play none none reverse',
+        // scrub: true,
+        toggleActions: 'play none none reverse',
       },
     });
 
@@ -183,22 +214,22 @@ const AboutSection = () => {
     const duplicateTL = gsap.timeline(
       {
 
-      
-      scrollTrigger: {
-        trigger: '.about-us-section',
-        start: 'top bottom',
-        end: 'top 50%',
-        scrub: 1,
-      },
-    }
+
+        scrollTrigger: {
+          trigger: '.about-us-section',
+          start: 'top bottom',
+          end: 'top 50%',
+          scrub: 1,
+        },
+      }
 
     );
     duplicateTL.to('.left-about-container-duplicate', {
       top: '20%',
-      
+
     }).to('.three-in-one-section', {
-        top: '20%',
-      })
+      top: '20%',
+    })
 
     // Timeline for .left-about-container and duplicates
     const tl = gsap.timeline({
@@ -214,9 +245,9 @@ const AboutSection = () => {
       left: '65%',
       opacity: '0',
       display: 'none',
-    }) .to('.three-in-one-section', {
-        opacity: '1',
-      }, '<')
+    }).to('.three-in-one-section', {
+      opacity: '1',
+    }, '<')
 
       .to(
         '.left-about-container-duplicate',
@@ -277,12 +308,12 @@ const AboutSection = () => {
       left: '-50%',
       opacity: '0',
     })
-      
+
       .to('.animation-section-2-img-comes-top', {
         top: '10%',
         opacity: '1',
       }, '<')
-      
+
       .to('.left-about-container-duplicate-2', {
         opacity: '1',
         top: '20%',
@@ -292,7 +323,7 @@ const AboutSection = () => {
         left: '-50%',
         opacity: '0',
       })
-     
+
       .to('.left-about-container-duplicate-3', {
         opacity: '1',
         top: '20%',
@@ -327,13 +358,14 @@ const AboutSection = () => {
       // xPercent: '-50%',
 
     },)
-  
+
 
 
     /* ---------- CLEANUP ---------- */
     return () => {
-      isMounted = false;
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+     isMounted = false;
+    window.removeEventListener("resize", updateCanvasSize);
+    middleTL.kill();
     };
   }, []);
 
@@ -347,7 +379,7 @@ const AboutSection = () => {
       {/* LEFT PANELS */}
       <div className="left-about-container">
         <p className="para-text-white">
-         SASE’s privacy lock secures every transaction with advanced encryption and authentication.
+          SASE’s privacy lock secures every transaction with advanced encryption and authentication.
         </p>
         <div className="left-about-svg-container">
           <svg
@@ -382,108 +414,75 @@ const AboutSection = () => {
 
       <div className="left-about-container-duplicate  allgoestop">
         <svg width="100" height="100" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_6983_3015)">
-                                <path d="M17.8281 49L26.3421 40.4864L23.5141 37.6582L14.9999 46.1718L13.4139 44.586C13.2283 44.4002 13.0079 44.2528 12.7653 44.1523C12.5226 44.0517 12.2626 43.9999 11.9999 43.9999C11.7373 43.9999 11.4772 44.0517 11.2346 44.1523C10.992 44.2528 10.7716 44.4002 10.5859 44.586L2.58595 52.586C2.40015 52.7716 2.25276 52.9921 2.1522 53.2347C2.05164 53.4773 1.99988 53.7374 1.99988 54C1.99988 54.2626 2.05164 54.5227 2.1522 54.7653C2.25276 55.0079 2.40015 55.2284 2.58595 55.414L8.58595 61.414C8.77159 61.5998 8.99202 61.7471 9.23464 61.8477C9.47726 61.9482 9.73732 62 9.99995 62C10.2626 62 10.5226 61.9482 10.7653 61.8477C11.0079 61.7471 11.2283 61.5998 11.4139 61.414L19.4139 53.414C19.5997 53.2284 19.7471 53.0079 19.8477 52.7653C19.9483 52.5227 20 52.2626 20 52C20 51.7374 19.9483 51.4773 19.8477 51.2347C19.7471 50.9921 19.5997 50.7716 19.4139 50.586L17.8281 49ZM9.99995 57.1718L6.82815 54L11.9999 48.8282L15.1717 52L9.99995 57.1718Z" fill="#F9DF37" />
-                                <path d="M48 60C44.8185 59.9964 41.7683 58.731 39.5187 56.4814C37.269 54.2317 36.0036 51.1815 36 48C36.0015 46.9545 36.1434 45.9139 36.4218 44.9062L19.0938 27.5786C18.086 27.8567 17.0455 27.9984 16 28C14.0449 28.008 12.1177 27.5362 10.3873 26.6259C8.65697 25.7157 7.17635 24.3949 6.07529 22.7793C4.97422 21.1636 4.28634 19.3026 4.07195 17.3592C3.85756 15.4159 4.12321 13.4496 4.84562 11.6328L5.96102 8.78899L12.586 15.414C12.9668 15.7776 13.473 15.9805 13.9995 15.9805C14.526 15.9805 15.0323 15.7776 15.413 15.414C15.5989 15.2284 15.7464 15.008 15.8471 14.7653C15.9477 14.5227 15.9995 14.2626 15.9995 13.9999C15.9995 13.7372 15.9477 13.4771 15.8471 13.2344C15.7464 12.9918 15.5989 12.7714 15.413 12.5858L8.78722 5.95799L11.6338 4.84379C13.4507 4.12231 15.4168 3.85743 17.3599 4.07234C19.303 4.28725 21.1637 4.9754 22.779 6.07651C24.3943 7.17761 25.715 8.65805 26.6252 10.3881C27.5354 12.1182 28.0075 14.0451 28 16C27.9985 17.0455 27.8566 18.0861 27.5782 19.0938L44.9062 36.4208C45.9141 36.143 46.9546 36.0015 48 36C49.9552 35.992 51.8824 36.4637 53.6128 37.3739C55.3432 38.2841 56.8238 39.605 57.9249 41.2206C59.0259 42.8363 59.7138 44.6974 59.9281 46.6408C60.1425 48.5841 59.8767 50.5504 59.1542 52.3672L58.04 55.211L51.414 48.586C51.0333 48.2224 50.527 48.0195 50.0005 48.0195C49.474 48.0195 48.9678 48.2224 48.587 48.586C48.401 48.7715 48.2535 48.9919 48.1527 49.2345C48.052 49.4771 48.0001 49.7372 48 49.9999C47.9999 50.2626 48.0516 50.5227 48.1522 50.7654C48.2527 51.0081 48.4002 51.2285 48.586 51.4142L55.211 58.04L52.3672 59.1558C50.9773 59.7087 49.4958 59.9951 48 60ZM20.125 22.9526L41.0468 43.875L40.5684 45.0938C40.1001 46.2648 39.917 47.5304 40.0343 48.7861C40.1517 50.0418 40.566 51.2516 41.2432 52.3155C41.9204 53.3794 42.841 54.267 43.9289 54.905C45.0168 55.5429 46.2409 55.9129 47.5 55.9844L45.7578 54.2422C45.2006 53.6852 44.7585 53.0238 44.4569 52.2959C44.1553 51.5679 44 50.7877 44 49.9998C44 49.2119 44.1553 48.4316 44.4569 47.7037C44.7585 46.9758 45.2006 46.3144 45.7578 45.7574C46.9009 44.6663 48.4205 44.0577 50.0007 44.0579C51.581 44.0581 53.1003 44.6671 54.2432 45.7584L55.9844 47.5C55.9128 46.2408 55.5426 45.0167 54.9046 43.9288C54.2665 42.8409 53.3789 41.9204 52.3148 41.2432C51.2508 40.5661 50.041 40.1517 48.7853 40.0344C47.5295 39.917 46.2639 40.1001 45.0928 40.5684L43.874 41.0454L22.954 20.1254L23.4324 18.9066C23.9008 17.7356 24.0839 16.47 23.9666 15.2143C23.8493 13.9585 23.4349 12.7487 22.7578 11.6848C22.0806 10.6208 21.1601 9.73315 20.0722 9.09516C18.9843 8.45717 17.7602 8.08713 16.501 8.01559L18.2422 9.75779C18.7995 10.3148 19.2416 10.9762 19.5432 11.7041C19.8448 12.432 20 13.2123 20 14.0002C20 14.7881 19.8448 15.5683 19.5432 16.2963C19.2416 17.0242 18.7995 17.6856 18.2422 18.2426C17.0991 19.3336 15.5795 19.9423 13.9993 19.9421C12.4191 19.9419 10.8997 19.3329 9.75682 18.2416L8.01562 16.5C8.08699 17.7592 8.45691 18.9833 9.09483 20.0713C9.73275 21.1592 10.6204 22.0798 11.6844 22.757C12.7483 23.4342 13.9582 23.8485 15.2139 23.9657C16.4697 24.0829 17.7353 23.8997 18.9062 23.4312L20.125 22.9526Z" fill="#F9DF37" />
-                                <path d="M58.246 5.70005C57.1032 4.60894 55.5838 4.00012 54.0038 4.00012C52.4237 4.00012 50.9044 4.60894 49.7616 5.70005L34.8008 20.6601L37.629 23.4881L52.589 8.52805C52.9701 8.16457 53.4765 7.96178 54.0031 7.96178C54.5297 7.96178 55.0361 8.16457 55.4172 8.52805C55.7915 8.90367 56.0016 9.4123 56.0016 9.94255C56.0016 10.4728 55.7915 10.9814 55.4172 11.3571L40.4572 26.317L43.2852 29.1453L58.2452 14.1863C59.3693 13.0603 60.0007 11.5343 60.0008 9.94332C60.001 8.3523 59.3699 6.82622 58.246 5.70005Z" fill="#F9DF37" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_6983_3015">
-                                    <rect width="100" height="100" fill="white" />
-                                </clipPath>
-                            </defs>
-                        </svg>
+          <g clip-path="url(#clip0_6983_3015)">
+            <path d="M17.8281 49L26.3421 40.4864L23.5141 37.6582L14.9999 46.1718L13.4139 44.586C13.2283 44.4002 13.0079 44.2528 12.7653 44.1523C12.5226 44.0517 12.2626 43.9999 11.9999 43.9999C11.7373 43.9999 11.4772 44.0517 11.2346 44.1523C10.992 44.2528 10.7716 44.4002 10.5859 44.586L2.58595 52.586C2.40015 52.7716 2.25276 52.9921 2.1522 53.2347C2.05164 53.4773 1.99988 53.7374 1.99988 54C1.99988 54.2626 2.05164 54.5227 2.1522 54.7653C2.25276 55.0079 2.40015 55.2284 2.58595 55.414L8.58595 61.414C8.77159 61.5998 8.99202 61.7471 9.23464 61.8477C9.47726 61.9482 9.73732 62 9.99995 62C10.2626 62 10.5226 61.9482 10.7653 61.8477C11.0079 61.7471 11.2283 61.5998 11.4139 61.414L19.4139 53.414C19.5997 53.2284 19.7471 53.0079 19.8477 52.7653C19.9483 52.5227 20 52.2626 20 52C20 51.7374 19.9483 51.4773 19.8477 51.2347C19.7471 50.9921 19.5997 50.7716 19.4139 50.586L17.8281 49ZM9.99995 57.1718L6.82815 54L11.9999 48.8282L15.1717 52L9.99995 57.1718Z" fill="#F9DF37" />
+            <path d="M48 60C44.8185 59.9964 41.7683 58.731 39.5187 56.4814C37.269 54.2317 36.0036 51.1815 36 48C36.0015 46.9545 36.1434 45.9139 36.4218 44.9062L19.0938 27.5786C18.086 27.8567 17.0455 27.9984 16 28C14.0449 28.008 12.1177 27.5362 10.3873 26.6259C8.65697 25.7157 7.17635 24.3949 6.07529 22.7793C4.97422 21.1636 4.28634 19.3026 4.07195 17.3592C3.85756 15.4159 4.12321 13.4496 4.84562 11.6328L5.96102 8.78899L12.586 15.414C12.9668 15.7776 13.473 15.9805 13.9995 15.9805C14.526 15.9805 15.0323 15.7776 15.413 15.414C15.5989 15.2284 15.7464 15.008 15.8471 14.7653C15.9477 14.5227 15.9995 14.2626 15.9995 13.9999C15.9995 13.7372 15.9477 13.4771 15.8471 13.2344C15.7464 12.9918 15.5989 12.7714 15.413 12.5858L8.78722 5.95799L11.6338 4.84379C13.4507 4.12231 15.4168 3.85743 17.3599 4.07234C19.303 4.28725 21.1637 4.9754 22.779 6.07651C24.3943 7.17761 25.715 8.65805 26.6252 10.3881C27.5354 12.1182 28.0075 14.0451 28 16C27.9985 17.0455 27.8566 18.0861 27.5782 19.0938L44.9062 36.4208C45.9141 36.143 46.9546 36.0015 48 36C49.9552 35.992 51.8824 36.4637 53.6128 37.3739C55.3432 38.2841 56.8238 39.605 57.9249 41.2206C59.0259 42.8363 59.7138 44.6974 59.9281 46.6408C60.1425 48.5841 59.8767 50.5504 59.1542 52.3672L58.04 55.211L51.414 48.586C51.0333 48.2224 50.527 48.0195 50.0005 48.0195C49.474 48.0195 48.9678 48.2224 48.587 48.586C48.401 48.7715 48.2535 48.9919 48.1527 49.2345C48.052 49.4771 48.0001 49.7372 48 49.9999C47.9999 50.2626 48.0516 50.5227 48.1522 50.7654C48.2527 51.0081 48.4002 51.2285 48.586 51.4142L55.211 58.04L52.3672 59.1558C50.9773 59.7087 49.4958 59.9951 48 60ZM20.125 22.9526L41.0468 43.875L40.5684 45.0938C40.1001 46.2648 39.917 47.5304 40.0343 48.7861C40.1517 50.0418 40.566 51.2516 41.2432 52.3155C41.9204 53.3794 42.841 54.267 43.9289 54.905C45.0168 55.5429 46.2409 55.9129 47.5 55.9844L45.7578 54.2422C45.2006 53.6852 44.7585 53.0238 44.4569 52.2959C44.1553 51.5679 44 50.7877 44 49.9998C44 49.2119 44.1553 48.4316 44.4569 47.7037C44.7585 46.9758 45.2006 46.3144 45.7578 45.7574C46.9009 44.6663 48.4205 44.0577 50.0007 44.0579C51.581 44.0581 53.1003 44.6671 54.2432 45.7584L55.9844 47.5C55.9128 46.2408 55.5426 45.0167 54.9046 43.9288C54.2665 42.8409 53.3789 41.9204 52.3148 41.2432C51.2508 40.5661 50.041 40.1517 48.7853 40.0344C47.5295 39.917 46.2639 40.1001 45.0928 40.5684L43.874 41.0454L22.954 20.1254L23.4324 18.9066C23.9008 17.7356 24.0839 16.47 23.9666 15.2143C23.8493 13.9585 23.4349 12.7487 22.7578 11.6848C22.0806 10.6208 21.1601 9.73315 20.0722 9.09516C18.9843 8.45717 17.7602 8.08713 16.501 8.01559L18.2422 9.75779C18.7995 10.3148 19.2416 10.9762 19.5432 11.7041C19.8448 12.432 20 13.2123 20 14.0002C20 14.7881 19.8448 15.5683 19.5432 16.2963C19.2416 17.0242 18.7995 17.6856 18.2422 18.2426C17.0991 19.3336 15.5795 19.9423 13.9993 19.9421C12.4191 19.9419 10.8997 19.3329 9.75682 18.2416L8.01562 16.5C8.08699 17.7592 8.45691 18.9833 9.09483 20.0713C9.73275 21.1592 10.6204 22.0798 11.6844 22.757C12.7483 23.4342 13.9582 23.8485 15.2139 23.9657C16.4697 24.0829 17.7353 23.8997 18.9062 23.4312L20.125 22.9526Z" fill="#F9DF37" />
+            <path d="M58.246 5.70005C57.1032 4.60894 55.5838 4.00012 54.0038 4.00012C52.4237 4.00012 50.9044 4.60894 49.7616 5.70005L34.8008 20.6601L37.629 23.4881L52.589 8.52805C52.9701 8.16457 53.4765 7.96178 54.0031 7.96178C54.5297 7.96178 55.0361 8.16457 55.4172 8.52805C55.7915 8.90367 56.0016 9.4123 56.0016 9.94255C56.0016 10.4728 55.7915 10.9814 55.4172 11.3571L40.4572 26.317L43.2852 29.1453L58.2452 14.1863C59.3693 13.0603 60.0007 11.5343 60.0008 9.94332C60.001 8.3523 59.3699 6.82622 58.246 5.70005Z" fill="#F9DF37" />
+          </g>
+          <defs>
+            <clipPath id="clip0_6983_3015">
+              <rect width="100" height="100" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
         <h3 className="head-text-white"> 100% Package Acceptance</h3>
         <p className="para-text-white">Accept every delivery — any size, any carrier, any time. No missed packages. No storage chaos.</p>
       </div>
 
       <div className="left-about-container-duplicate-2 allgoestop">
-         <svg width="100" height="100" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_6983_3007)">
-                                <path d="M22 22V42H42V22H22ZM38 38H26V26H38V38Z" fill="#F9DF37" />
-                                <path d="M60 26V22H52V16C52 14.9391 51.5786 13.9217 50.8284 13.1716C50.0783 12.4214 49.0609 12 48 12H42V4H38V12H26V4H22V12H16C14.9391 12 13.9217 12.4214 13.1716 13.1716C12.4214 13.9217 12 14.9391 12 16V22H4V26H12V38H4V42H12V48C12 49.0609 12.4214 50.0783 13.1716 50.8284C13.9217 51.5786 14.9391 52 16 52H22V60H26V52H38V60H42V52H48C49.0609 52 50.0783 51.5786 50.8284 50.8284C51.5786 50.0783 52 49.0609 52 48V42H60V38H52V26H60ZM48 48H16V16H48V48Z" fill="#F9DF37" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_6983_3007">
-                                    <rect width="100" height="100" fill="white" />
-                                </clipPath>
-                            </defs>
-                        </svg>
+        <svg width="100" height="100" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_6983_3007)">
+            <path d="M22 22V42H42V22H22ZM38 38H26V26H38V38Z" fill="#F9DF37" />
+            <path d="M60 26V22H52V16C52 14.9391 51.5786 13.9217 50.8284 13.1716C50.0783 12.4214 49.0609 12 48 12H42V4H38V12H26V4H22V12H16C14.9391 12 13.9217 12.4214 13.1716 13.1716C12.4214 13.9217 12 14.9391 12 16V22H4V26H12V38H4V42H12V48C12 49.0609 12.4214 50.0783 13.1716 50.8284C13.9217 51.5786 14.9391 52 16 52H22V60H26V52H38V60H42V52H48C49.0609 52 50.0783 51.5786 50.8284 50.8284C51.5786 50.0783 52 49.0609 52 48V42H60V38H52V26H60ZM48 48H16V16H48V48Z" fill="#F9DF37" />
+          </g>
+          <defs>
+            <clipPath id="clip0_6983_3007">
+              <rect width="100" height="100" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
 
         <h3 className="head-text-white">Best-in-Class Technology</h3>
         <p className="para-text-white">Experience reliable hardware paired with powerful, user-friendly software. Real-time monitoring, analytics, and integrations keep everything under control.</p>
       </div>
 
       <div className="left-about-container-duplicate-3 allgoestop">
-       <svg width="100" height="100" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_7186_12)">
-                                <path d="M58.963 17.248L38.963 6.24804C38.6677 6.08564 38.3362 6.00049 37.9992 6.00049C37.6622 6.00049 37.3307 6.08564 37.0354 6.24804L17.0354 17.248C16.7218 17.4207 16.4603 17.6743 16.2782 17.9825C16.0961 18.2907 16 18.6421 16 19C16 19.358 16.0961 19.7094 16.2782 20.0176C16.4603 20.3257 16.7218 20.5794 17.0354 20.752L35.9992 31.1826V52.6172L29.9268 49.2786L27.9992 52.7824L37.0354 57.752C37.3306 57.9147 37.6621 58 37.9992 58C38.3362 58 38.6678 57.9147 38.963 57.752L58.963 46.752C59.2767 46.5795 59.5384 46.3259 59.7206 46.0177C59.9029 45.7095 59.9991 45.3581 59.9992 45V19C59.9991 18.642 59.9029 18.2905 59.7206 17.9824C59.5384 17.6742 59.2767 17.4206 58.963 17.248ZM37.9992 10.2832L53.8488 19L37.9992 27.7168L22.1496 19L37.9992 10.2832ZM55.9992 43.8174L39.9992 52.6174V31.1826L55.9992 22.3826V43.8174Z" fill="#F9DF37" />
-                                <path d="M4 32L20 32V28H4V32Z" fill="#F9DF37" />
-                                <path d="M8 48H24V44H8V48Z" fill="#F9DF37" />
-                                <path d="M12 40H28V36H12V40Z" fill="#F9DF37" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_7186_12">
-                                    <rect width="100" height="100" fill="white" />
-                                </clipPath>
-                            </defs>
-                        </svg>
+        <svg width="100" height="100" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_7186_12)">
+            <path d="M58.963 17.248L38.963 6.24804C38.6677 6.08564 38.3362 6.00049 37.9992 6.00049C37.6622 6.00049 37.3307 6.08564 37.0354 6.24804L17.0354 17.248C16.7218 17.4207 16.4603 17.6743 16.2782 17.9825C16.0961 18.2907 16 18.6421 16 19C16 19.358 16.0961 19.7094 16.2782 20.0176C16.4603 20.3257 16.7218 20.5794 17.0354 20.752L35.9992 31.1826V52.6172L29.9268 49.2786L27.9992 52.7824L37.0354 57.752C37.3306 57.9147 37.6621 58 37.9992 58C38.3362 58 38.6678 57.9147 38.963 57.752L58.963 46.752C59.2767 46.5795 59.5384 46.3259 59.7206 46.0177C59.9029 45.7095 59.9991 45.3581 59.9992 45V19C59.9991 18.642 59.9029 18.2905 59.7206 17.9824C59.5384 17.6742 59.2767 17.4206 58.963 17.248ZM37.9992 10.2832L53.8488 19L37.9992 27.7168L22.1496 19L37.9992 10.2832ZM55.9992 43.8174L39.9992 52.6174V31.1826L55.9992 22.3826V43.8174Z" fill="#F9DF37" />
+            <path d="M4 32L20 32V28H4V32Z" fill="#F9DF37" />
+            <path d="M8 48H24V44H8V48Z" fill="#F9DF37" />
+            <path d="M12 40H28V36H12V40Z" fill="#F9DF37" />
+          </g>
+          <defs>
+            <clipPath id="clip0_7186_12">
+              <rect width="100" height="100" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
         <h3 className="head-text-white">Unparalleled Service</h3>
         <p className="para-text-white"> From installation to ongoing support, our dedicated team ensures your locker system operates flawlessly every day.</p>
       </div>
 
       <div className="three-in-one-section allgoestop">
         <div className="three-in-one-container">
-       <svg width="60" height="60" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_7186_12)">
-                                <path d="M58.963 17.248L38.963 6.24804C38.6677 6.08564 38.3362 6.00049 37.9992 6.00049C37.6622 6.00049 37.3307 6.08564 37.0354 6.24804L17.0354 17.248C16.7218 17.4207 16.4603 17.6743 16.2782 17.9825C16.0961 18.2907 16 18.6421 16 19C16 19.358 16.0961 19.7094 16.2782 20.0176C16.4603 20.3257 16.7218 20.5794 17.0354 20.752L35.9992 31.1826V52.6172L29.9268 49.2786L27.9992 52.7824L37.0354 57.752C37.3306 57.9147 37.6621 58 37.9992 58C38.3362 58 38.6678 57.9147 38.963 57.752L58.963 46.752C59.2767 46.5795 59.5384 46.3259 59.7206 46.0177C59.9029 45.7095 59.9991 45.3581 59.9992 45V19C59.9991 18.642 59.9029 18.2905 59.7206 17.9824C59.5384 17.6742 59.2767 17.4206 58.963 17.248ZM37.9992 10.2832L53.8488 19L37.9992 27.7168L22.1496 19L37.9992 10.2832ZM55.9992 43.8174L39.9992 52.6174V31.1826L55.9992 22.3826V43.8174Z" fill="#ffff" />
-                                <path d="M4 32L20 32V28H4V32Z" fill="#ffff" />
-                                <path d="M8 48H24V44H8V48Z" fill="#ffff" />
-                                <path d="M12 40H28V36H12V40Z" fill="#ffff" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_7186_12">
-                                    <rect width="60" height="60" fill="white" />
-                                </clipPath>
-                            </defs>
-                        </svg>
-        <h3 className="subheading-text-white">100% Package Acceptance</h3>
-        
+          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 150 150" fill="none"><path d="M107.93 21.0581H13.0552V111.743H107.93V21.0581Z" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M135.945 128.942L108.025 111.743V21.0581L135.945 38.2567V128.942Z" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M28.8799 111.664L33.8647 58.5498H89.3148L96.0139 111.664H28.8799Z" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M85.0211 58.7031L80.5005 111.664" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M46.9517 63.4645V48.7788C46.9517 43.2452 51.467 38.7114 56.9899 38.7114C62.5074 38.7114 67.028 43.2399 67.028 48.7788V63.4645" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M56.9214 58.5496V49.2441C56.9214 43.7105 61.4367 39.1768 66.9596 39.1768C72.4772 39.1768 76.9978 43.7052 76.9978 49.2441V58.5496" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <h3 className="subheading-text-white">Secure & Self-Service
+          </h3>
+
         </div>
         <div className="three-in-one-container">
-        <svg width="60" height="60" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_7186_12)">
-                                <path d="M58.963 17.248L38.963 6.24804C38.6677 6.08564 38.3362 6.00049 37.9992 6.00049C37.6622 6.00049 37.3307 6.08564 37.0354 6.24804L17.0354 17.248C16.7218 17.4207 16.4603 17.6743 16.2782 17.9825C16.0961 18.2907 16 18.6421 16 19C16 19.358 16.0961 19.7094 16.2782 20.0176C16.4603 20.3257 16.7218 20.5794 17.0354 20.752L35.9992 31.1826V52.6172L29.9268 49.2786L27.9992 52.7824L37.0354 57.752C37.3306 57.9147 37.6621 58 37.9992 58C38.3362 58 38.6678 57.9147 38.963 57.752L58.963 46.752C59.2767 46.5795 59.5384 46.3259 59.7206 46.0177C59.9029 45.7095 59.9991 45.3581 59.9992 45V19C59.9991 18.642 59.9029 18.2905 59.7206 17.9824C59.5384 17.6742 59.2767 17.4206 58.963 17.248ZM37.9992 10.2832L53.8488 19L37.9992 27.7168L22.1496 19L37.9992 10.2832ZM55.9992 43.8174L39.9992 52.6174V31.1826L55.9992 22.3826V43.8174Z" fill="#ffff" />
-                                <path d="M4 32L20 32V28H4V32Z" fill="#ffff" />
-                                <path d="M8 48H24V44H8V48Z" fill="#ffff" />
-                                <path d="M12 40H28V36H12V40Z" fill="#ffff" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_7186_12">
-                                    <rect width="60" height="60" fill="white" />
-                                </clipPath>
-                            </defs>
-                        </svg>
-        <h3 className="subheading-text-white">Best-in-Class Technology
-</h3>
-      
+          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 150 150" fill="none"><path d="M74.5002 127.059C50.4803 127.059 30.9429 107.542 30.9429 83.5471C30.9429 59.5525 50.4803 40.0356 74.5002 40.0356C98.5201 40.0356 118.057 59.5525 118.057 83.5471C118.057 107.542 98.5201 127.059 74.5002 127.059Z" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M74.5002 121.192C95.3127 121.192 112.185 104.338 112.185 83.547C112.185 62.7564 95.3127 45.9023 74.5002 45.9023C53.6878 45.9023 36.8159 62.7564 36.8159 83.547C36.8159 104.338 53.6878 121.192 74.5002 121.192Z" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M36.8159 83.5469H44.4235" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M104.577 83.5469H112.184" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M74.5 113.587V121.192" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M74.5 45.9023V53.5019" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M74.4951 83.2128V60.3765" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M66.1807 39.7482V31.3765H82.8098V39.8989" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M87.7495 23.9419H61.2456V31.3766H87.7495V23.9419Z" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M74.4951 83.688L88.9278 92.427" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <h3 className="subheading-text-white">Improved Operations
+
+          </h3>
+
         </div>
         <div className="three-in-one-container">
-        <svg width="60" height="60" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_7186_12)">
-                                <path d="M58.963 17.248L38.963 6.24804C38.6677 6.08564 38.3362 6.00049 37.9992 6.00049C37.6622 6.00049 37.3307 6.08564 37.0354 6.24804L17.0354 17.248C16.7218 17.4207 16.4603 17.6743 16.2782 17.9825C16.0961 18.2907 16 18.6421 16 19C16 19.358 16.0961 19.7094 16.2782 20.0176C16.4603 20.3257 16.7218 20.5794 17.0354 20.752L35.9992 31.1826V52.6172L29.9268 49.2786L27.9992 52.7824L37.0354 57.752C37.3306 57.9147 37.6621 58 37.9992 58C38.3362 58 38.6678 57.9147 38.963 57.752L58.963 46.752C59.2767 46.5795 59.5384 46.3259 59.7206 46.0177C59.9029 45.7095 59.9991 45.3581 59.9992 45V19C59.9991 18.642 59.9029 18.2905 59.7206 17.9824C59.5384 17.6742 59.2767 17.4206 58.963 17.248ZM37.9992 10.2832L53.8488 19L37.9992 27.7168L22.1496 19L37.9992 10.2832ZM55.9992 43.8174L39.9992 52.6174V31.1826L55.9992 22.3826V43.8174Z" fill="#ffff" />
-                                <path d="M4 32L20 32V28H4V32Z" fill="#ffff" />
-                                <path d="M8 48H24V44H8V48Z" fill="#ffff" />
-                                <path d="M12 40H28V36H12V40Z" fill="#ffff" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_7186_12">
-                                    <rect width="60" height="60" fill="white" />
-                                </clipPath>
-                            </defs>
-                        </svg>
-        <h3 className="subheading-text-white">Unparalleled Service</h3>
-       
+          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 150 150" fill="none"><path d="M91.8784 106.699H23.2417C20.3205 106.699 17.9287 104.309 17.9287 101.391V45.2357C17.9287 42.3172 20.3205 39.9277 23.2417 39.9277H108.44C111.361 39.9277 113.753 42.3172 113.753 45.2357V89.4297" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M94.5815 100.714H26.2002V45.9131H105.481V90.8216" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M114.05 131.072C112.987 130.984 111.942 130.631 110.902 130.019C109.587 129.244 108.254 128.455 107.07 127.499C101.92 123.356 96.8158 119.148 91.6932 114.967C90.1885 113.738 88.7766 112.318 89.1296 110.258C89.3432 109.015 90.012 107.381 90.9826 106.862C92.0369 106.3 93.7738 106.537 95.0231 106.964C96.1981 107.367 97.1362 108.476 98.562 109.571C98.2044 108.639 98.0325 108.091 97.791 107.581C94.3125 100.129 90.8154 92.6871 87.3369 85.2402C85.7347 81.816 86.148 79.1992 88.4423 78.0439C90.7829 76.8654 93.2026 78.2666 94.8559 81.7743C96.6346 85.5511 98.3994 89.3371 100.155 93.0861C101.153 92.2649 101.962 91.1838 103.011 90.8497C104.089 90.5064 105.398 90.8868 106.74 90.9564C108.789 86.7157 111.533 86.2517 114.264 89.4346C115.736 88.5345 116.86 87.4116 118.161 87.1518C120.028 86.776 121.244 88.2097 121.992 89.7918C125.707 97.6702 129.52 105.507 133.013 113.483C134.787 117.529 134.295 120.716 131.736 123.119" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M73.5806 64.2775C73.5806 64.2775 72.0991 58.4778 65.5415 58.5659C58.6077 58.6587 57.5024 63.9203 57.86 65.8829C58.2176 67.8455 59.648 70.8799 65.8991 72.49C72.1549 74.0953 73.8871 76.1508 73.8871 79.7188C73.8871 82.4516 71.2585 86.5903 65.8991 86.233C60.5397 85.8758 58.2176 83.1986 57.86 80.1642" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M65.8389 55.4248V91.2022" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <h3 className="subheading-text-white">Carrier-Friendly
+          </h3>
+
         </div>
       </div>
 
@@ -492,9 +491,7 @@ const AboutSection = () => {
         <div className="about-us-inner-container">
           <div className="left-about-container-outer">
             <div className="left-about-container-inner-one">
-              <p className="para-text">
-               At SASE, we simplify logistics with smart, <br /> reliable, and human-centric technology.
-              </p>
+             
               <div className="cta-wrapper" style={{ width: "100%" }}>
                 <Link to="/" className="find-btn">
                   Find Your Solution
