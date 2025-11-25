@@ -7,6 +7,7 @@ import { IoArrowForward } from "react-icons/io5";
 import servicesectionimg from "../assets/Home-images/Why-Choose-images/1.png";
 import servicesectionimg2 from "../assets/Home-images/Why-Choose-images/2.png";
 import servicesectionimg3 from "../assets/Home-images/Why-Choose-images/3.png";
+import logo from '../assets/About-images/logo-ai.png'
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -410,6 +411,16 @@ let isMounted = true;
           </svg>
         </div>
         <div className="left-about-line-container"></div>
+
+
+
+        <div className="left-about-line-container-duplicate-down-icon-container">
+           <img src={logo} alt="" srcset="" />
+
+          <p className="para-text-white">
+            AI Automation
+          </p>
+        </div>
       </div>
 
       <div className="left-about-container-duplicate  allgoestop">
@@ -479,7 +490,7 @@ let isMounted = true;
 
         </div>
         <div className="three-in-one-container">
-          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 150 150" fill="none"><path d="M91.8784 106.699H23.2417C20.3205 106.699 17.9287 104.309 17.9287 101.391V45.2357C17.9287 42.3172 20.3205 39.9277 23.2417 39.9277H108.44C111.361 39.9277 113.753 42.3172 113.753 45.2357V89.4297" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M94.5815 100.714H26.2002V45.9131H105.481V90.8216" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M114.05 131.072C112.987 130.984 111.942 130.631 110.902 130.019C109.587 129.244 108.254 128.455 107.07 127.499C101.92 123.356 96.8158 119.148 91.6932 114.967C90.1885 113.738 88.7766 112.318 89.1296 110.258C89.3432 109.015 90.012 107.381 90.9826 106.862C92.0369 106.3 93.7738 106.537 95.0231 106.964C96.1981 107.367 97.1362 108.476 98.562 109.571C98.2044 108.639 98.0325 108.091 97.791 107.581C94.3125 100.129 90.8154 92.6871 87.3369 85.2402C85.7347 81.816 86.148 79.1992 88.4423 78.0439C90.7829 76.8654 93.2026 78.2666 94.8559 81.7743C96.6346 85.5511 98.3994 89.3371 100.155 93.0861C101.153 92.2649 101.962 91.1838 103.011 90.8497C104.089 90.5064 105.398 90.8868 106.74 90.9564C108.789 86.7157 111.533 86.2517 114.264 89.4346C115.736 88.5345 116.86 87.4116 118.161 87.1518C120.028 86.776 121.244 88.2097 121.992 89.7918C125.707 97.6702 129.52 105.507 133.013 113.483C134.787 117.529 134.295 120.716 131.736 123.119" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M73.5806 64.2775C73.5806 64.2775 72.0991 58.4778 65.5415 58.5659C58.6077 58.6587 57.5024 63.9203 57.86 65.8829C58.2176 67.8455 59.648 70.8799 65.8991 72.49C72.1549 74.0953 73.8871 76.1508 73.8871 79.7188C73.8871 82.4516 71.2585 86.5903 65.8991 86.233C60.5397 85.8758 58.2176 83.1986 57.86 80.1642" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M65.8389 55.4248V91.2022" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 150 150" fill="none"><path d="M91.8784 106.699H23.2417C20.3205 106.699 17.9287 104.309 17.9287 101.391V45.2357C17.9287 42.3172 20.3205 39.9277 23.2417 39.9277H108.44C111.361 39.9277 113.753 42.3172 113.753 45.2357V89.4297" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M94.5815 100.714H26.2002V45.9131H105.481V90.8216" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path><path d="M114.05 131.072C112.987 130.984 111.942 130.631 110.902 130.019C109.587 129.244 108.254 128.455 107.07 127.499C101.92 123.356 96.8158 119.148 91.6932 114.967C90.1885 113.738 88.7766 112.318 89.1296 110.258C89.3432 109.015 90.012 107.381 90.9826 106.862C92.0369 106.3 93.7738 106.537 95.0231 106.964C96.1981 107.367 97.1362 108.476 98.562 109.571C98.2044 108.639 98.0325 108.091 97.791 107.581C94.3125 100.129 90.8154 92.6871 87.3369 85.2402C85.7347 81.816 86.148 79.1992 88.4423 78.0439C90.7829 76.8654 93.2026 78.2666 94.8559 81.7743C96.6346 85.5511 98.3994 89.3371 100.155 93.0861C101.153 92.2649 101.962 91.1838 103.011 90.8497C104.089 90.5064 105.398 90.8868 106.74 90.9564C108.789 86.7157 111.533 86.2517 114.264 89.4346C115.736 88.5345 116.86 87.4116 118.161 87.1518C120.028 86.776 121.244 88.2097 121.992 89.7918C125.707 97.6702 129.52 105.507 133.013 113.483C134.787 117.529 134.295 120.716 131.736 123.119" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
           <h3 className="subheading-text-white">Carrier-Friendly
           </h3>
 

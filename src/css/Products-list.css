@@ -4,8 +4,9 @@
    1. SECTION & CONTAINER (unchanged)
    ------------------------------------------------- */
 .products-list-section {
-    padding: 0px 0px 100px 0px;
+    padding: 0px 0px 0px 0px;
     background: #ffffff;
+    /* overflow-x: hidden; */
 }
 
 .products-list-container {
@@ -13,30 +14,98 @@
     margin: auto;
     /* padding: 0 20px; */
 }
-.products-list-title{
+
+.products-list-title {
     padding: 0px 60px 40px 60px;
 }
+/* Add to your Products-list.css */
 
+.product-category {
+  margin-bottom: 80px;
+}
+
+.category-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0F75BC;
+  margin: 0 0 40px 60px;
+  padding-top: 40px;
+  position: relative;
+}
+
+.category-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 80px;
+  height: 4px;
+  background: #ffd700;
+}
+
+/* Centered single product in category */
+.product-card.centered {
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: 600px;
+}
+
+/* Keep your existing .span-2 etc. */
 
 /* -------------------------------------------------
    2. GRID – NEW LAYOUT (3-col base)
    ------------------------------------------------- */
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    /* always 3 logical columns */
-    /* gap: 40px; */
-    /* keep your original gap */
+    grid-template-columns: 1fr 1fr;
+    /* ← two columns */
+    gap: 40px 20px;
+    /* optional spacing */
+    align-items: start;
+    justify-content: start;
+}
+
+.product-card[data-row="1"] {
+    grid-row: 1;
+}
+
+.product-card[data-row="2"] {
+    grid-row: 2;
+}
+
+.product-card[data-row="3"] {
+    grid-row: 3;
+}
+
+.product-card[data-row="4"] {
+    grid-row: 4;
+}
+
+/* Row 2 – D stays in column 1, G takes column 1-2 */
+.product-card[data-id="4"] {
+    grid-column: 1;
+}
+
+/* D */
+/* .product-card[data-id="7"] {
+    grid-column: 1 / 3;
+} */
+
+/* G spans both */
+
+/* Row 4 – center the single card F */
+.product-card[data-row="4"] {
+    grid-column: 1 / 3;
+    /* take full width */
+    justify-self: center;
+    /* horizontally center */
+    max-width: 600px;
+    /* optional – limit width so it doesn’t stretch too much */
 }
 
 /* Span utilities – added */
-.product-card.span-1 {
-    grid-column: span 1;
-}
-
-.product-card.span-2 {
-    grid-column: span 2;
-}
+.product-card.span-1 { grid-column: span 1; }
+.product-card.span-2 { grid-column: span 2; }
 
 /* Row-reverse for the last two cards – added */
 .products-grid>.product-card:nth-child(6) {
@@ -45,7 +114,9 @@
 
 /* Card F */
 .products-grid>.product-card:nth-child(7) {
-    grid-column: 2 / 4;
+    grid-column: 1;
+    margin-left: -170px;
+
 }
 
 /* Card G */
@@ -54,7 +125,7 @@
    3. CARD (unchanged except overflow)
    ------------------------------------------------- */
 .product-card {
-    overflow: hidden;
+    /* overflow: hidden; */
     transition: transform 0.3s ease;
     /* border-radius: 12px; */
 }
@@ -63,11 +134,65 @@
    4. IMAGE (unchanged)
    ------------------------------------------------- */
 .product-image {
-    height: 300px;
-    overflow: hidden;
-    
-    
+    height: auto;
+    /* overflow: hidden; */
+    position: relative;
+    /* object-fit: contain; */
+    object-position: left;
+    cursor: none;
+    width: 550px;
 }
+
+/* Magnifying Lens (60x60px circle that follows cursor) */
+.magnifying-lens {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(2px);
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+/* Large Zoomed Preview Box (200x200px) */
+.zoom-preview {
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    border: 3px solid #0F75BC;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background-repeat: no-repeat;
+    background-size: 300%;
+    /* Adjust based on zoom level */
+    pointer-events: none;
+    z-index: 1000000000000 !important;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    top: -220px;
+    /* Will be adjusted dynamically */
+    left: 100px;
+    /* Will be adjusted */
+    transform: translate(-50%, 67%);
+    background-color: white;
+}
+
+/* Show lens + preview on hover */
+.product-image:hover .magnifying-lens,
+.product-image:hover .zoom-preview {
+    opacity: 1;
+}
+
+/* Optional: Hide default cursor completely
+.product-image:hover {
+    cursor: none;
+} */
 
 .locker-img {
     width: 100%;
@@ -106,7 +231,7 @@
 
 .colors {
     display: flex;
-    gap: 40px;
+    gap: 20px;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
@@ -131,6 +256,7 @@
     border-radius: 50%;
     transition: all 0.2s ease;
     position: relative;
+    border: 2px solid #000000;
 }
 
 .color-item.active {
@@ -165,7 +291,7 @@
     justify-content: start;
     width: fit-content;
     gap: 8px;
-    color:black;
+    color: black;
     transition: background 0.3s;
 }
 
@@ -179,6 +305,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .para-text.wide-desc {
     width: 50%;
 }
@@ -187,9 +314,10 @@
    8. RESPONSIVE (updated for new layout)
    ------------------------------------------------- */
 @media only screen and (max-width: 800px) {
-   .products-list-section {
+    .products-list-section {
         padding-top: 60px;
     }
+
     .products-grid {
         grid-template-columns: 1fr;
         /* stack everything */
@@ -220,15 +348,26 @@
     }
 
     .product-card:nth-child(even) {
-        background-color: #ffffff !important; /* or transparent */
+        background-color: #ffffff !important;
+        /* or transparent */
     }
+
     .para-text.wide-desc {
         width: 100% !important;
     }
+
     .product-image {
-   padding-left:0px !important;
-    
-    
-}
+        padding-left: 0px !important;
+           height: 100%;
+    /* overflow: hidden; */
+    position: relative;
+    /* object-fit: contain; */
+    object-position: left;
+    cursor: none;
+    width: auto;
+    margin-top: 30px;
+
+
+    }
 
 }

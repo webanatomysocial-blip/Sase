@@ -7,7 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import arrow from '../assets/Home-images/Extra-images/arrow.gif';
 import VariableProximity from './VariableProximity';
-import Logos from '../assets/Home-images/Logo -01.png';
+import Logos from '../assets/Home-images/Logo-01.png';
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -196,7 +196,7 @@ function LockerHome() {
         <div className="home-banner-overlay" ref={homeoverlay}></div>
         <canvas ref={canvasRef} className="canvas-sticky" />
         <a ref={buttonRef} className="scroll-button" style={{ color: 'white' }}>
-          Dive Down  <span><img src={arrow} alt="" /></span>
+          Drive Down<span><img src={arrow} alt="" /></span>
         </a>
 
 
@@ -214,7 +214,7 @@ function LockerHome() {
           />
         </div>
       </div>
-        <img src={Logos} alt="Logo" className="logo-image-home-banner" ref={bannerimgRef} />
+        <img src={Logos} alt="Logo" className="logo-image-home-banner only-windows" ref={bannerimgRef} />
 
       {/* ABOUT US SECTION */}
       {/* <AboutSection ref={aboutUsSectionRef} /> */}

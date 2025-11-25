@@ -34,10 +34,10 @@ const LockPassword = () => {
        
 
       });
-          tl.to(".down-arrow-password-section, .down-text-password-section", {
-            opacity: 1,
+    //       tl.to(".down-arrow-password-section, .down-text-password-section", {
+    //         opacity: 1,
       
-    })
+    // })
 
       randomBoxes.forEach((box, i) => {
         // Define the next box (or null for the last one)
@@ -77,7 +77,7 @@ const LockPassword = () => {
 
           }) 
           
-    tl.to(".down-arrow-password-section, .down-text-password-section", {
+    tl.to(".down-arrow-password-section ", {
             opacity: 0,
       
     } , `step${randomBoxes.length - 1}+=6`)
@@ -90,10 +90,14 @@ const LockPassword = () => {
 
   return (
     <section ref={sectionRef} className="locker-section">
-      <img src={downarrow} alt="Down Arrow" className="down-arrow-password-section"  />
+      <div className="down-arrow-password-section">
+         <img src={downarrow} alt="Down Arrow" className="down-arrow-password-img"  />
       <p className="subheading-text-white down-text-password-section">
-        Scroll Down
+        Dive To Retrive the Parcel
       </p>
+
+      </div>
+     
       <div className="locker-container">
         <div className="locker-box">
           {Array(9)

@@ -125,7 +125,7 @@ function Home() {
       <AboutSection />
       <Business />
       <BusinessMobile />
-      <VideoComponent />
+      <VideoComponent marginBottom="-100px" />
       <LockPassword />
       <FAQ />
       <Footer />

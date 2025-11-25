@@ -11,7 +11,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: start;
-    gap: 450px;
+    gap: 400px;
 }
 
 .footer-logo img {
@@ -84,7 +84,16 @@
     color: #fff;
     font-weight: 500;
 }
+.certified-logos{
+    margin-top:20px;
+    
+}
+.certified-logos-footer{
+    margin-top:20px;
 
+    width:280px;
+  height:auto;
+}
 @media only screen and (max-width: 800px) {
     .footer-container {
         flex-direction: column;

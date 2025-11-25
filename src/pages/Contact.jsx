@@ -60,8 +60,8 @@ export default function Contact() {
 
             <div className="contact-map-section-contents-left-inner">
               <h1 className="head-text">Call</h1>
-              <a className="para-text" href="tel:+91 1234567890">
-                +91 1234567890
+              <a className="para-text" href="tel:+91 7673927227">
+                +91 7673927227
               </a>
             </div>
             <div className="contact-map-section-contents-left-inner">
@@ -75,15 +75,28 @@ export default function Contact() {
           <div className="contact-map-section-contents-left-outer">
             <div className="contact-map-section-contents-left-inner">
               <h1 className="head-text">Email</h1>
-              <a className="para-text" href="tel:+91 1234567890">
-                email@sase.com
+              <a className="para-text" href="mailto:parceldropnetworks@gmail">
+                parceldropnetworks@gmail.com
               </a>
             </div>
             <div className="contact-map-section-contents-left-inner">
               <h1 className="head-text">Social Networks</h1>
-              <a className="para-text" href="tel:+91 1234567890">
-                +91 1234567890
-              </a>
+
+              <div className="social-media-icons">
+                <a href="https://www.facebook.com">
+                  <img src="https://img.icons8.com/color/40/000/facebook-new.png" alt="facebook" />
+                </a>
+                <a href="https://www.instagram.com">
+                  <img src="https://img.icons8.com/color/40/000000/instagram-new.png" alt="instagram" />
+                </a>
+                <a href="https://twitter.com">
+                  <img src="https://img.icons8.com/color/40/000000/twitter.png" alt="twitter" />
+                </a>
+                <a href="https://www.linkedin.com">
+                  <img src="https://img.icons8.com/color/40/000000/linkedin.png" alt="linkedin" />
+                </a>
+             
+            </div>
             </div>
 
           </div>

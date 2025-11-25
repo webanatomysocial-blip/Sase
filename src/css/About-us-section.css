@@ -26,6 +26,25 @@
 .left-about-container-inner-one p{
   padding-right: 60px;
 }
+.left-about-line-container-duplicate-down-icon-container{
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 200px;
+  /* background-color: #797979; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 10px; */
+  cursor: pointer;
+  flex-direction: column;
+  z-index: 1000;
+}
+.left-about-line-container-duplicate-down-icon-container img{
+  /* margin-top: -5px; */
+  width: 40px;
+  height: auto;
+}
 
 .left-about-container-outer {
   display: flex;

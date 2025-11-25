@@ -35,12 +35,9 @@ export default function About() {
             <section className="about-us-page-certificates-section">
                 <div className="about-us-page-certificates-container-left-right">
                     <div className="about-us-page-certificates-box-text">
-                        <p className="head-text">
-                            lorem ipsum 
-                        </p>
+
                         <p className="para-text">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut hic necessitatibus quidem atque aspernatur harum, doloremque ratione accusamus quis deleniti aperiam? Minus fugit non vel dicta cum quisquam, magni enim!
-                        </p>
+At SASE, we redefine the management of deliveries, pickups, and storage. Our intelligent locker systems introduce AI automation, security, and convenience across residential, commercial, and institutional environments. Engineered for flexibility and reliability, our lockers integrate seamlessly into any space, providing 24/7 access and comprehensive operational oversight. With advanced AI automation technology, modular designs, and real-time management tools, SASE smart lockers transform traditional logistics into a modern, effortless experience for residents, employees, couriers, and operators alike.                        </p>
                     </div>
                     <div className="about-us-page-certificates-box-img">
                         <img src={LOGOS} alt="" />

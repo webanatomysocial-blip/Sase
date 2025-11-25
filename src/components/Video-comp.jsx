@@ -22,19 +22,20 @@ const VideoComponent = (props) => {
   };
 
   return (
-    <section 
+    <section
       className="video-container"
       style={{
         background: props.background,
         paddingTop: props.paddingTop,
-        paddingBottom: props.paddingBottom
+        paddingBottom: props.paddingBottom,
+        marginBottom: props.marginBottom
       }}
     >
       <div className="video-content">
         <div className="video-left-content">
           <h5 className="head-text" style={{ color: props.color }}>
-            See how SASE’s intelligent locker systems redefine convenience and control. 
-            Watch our demo to discover how seamless automation and robust security come together 
+            See how SASE’s intelligent locker systems redefine convenience and control.
+            Watch our demo to discover how seamless automation and robust security come together
             to make every delivery effortless.
           </h5>
         </div>
@@ -49,7 +50,7 @@ const VideoComponent = (props) => {
               loop
               muted
               playsInline
-              style={{objectFit: props.objectFit || 'cover'}}
+              style={{ objectFit: props.objectFit || 'cover' }}
             />
 
             <button
@@ -64,8 +65,18 @@ const VideoComponent = (props) => {
               }}
             >
               {isPlaying ? <FaPause size={20} /> : <FaPlay size={20} />}
+
             </button>
+
           </div>
+
+          <div
+            className="video-name-text"
+            style={{ display: isPlaying ? "none" : "block" }}
+          >
+            <p className="para-text-white">Click To Experience The Demo</p>
+          </div>
+
         </div>
       </div>
     </section>

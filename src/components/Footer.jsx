@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { FaInstagram, FaFacebookF, FaYoutube } from "react-icons/fa";
 import logo from "../assets/SASE-logo.png";
 import "../css/Footer.css";
+import Logos from '../assets/Home-images/Logo-01.png';
+
 
 const Footer = () => {
   return (
@@ -18,9 +20,9 @@ const Footer = () => {
           <div className="nav-column">
             <h3>Quick Links</h3>
             <ul>
+              <li><Link to="/about">About Us</Link></li>
               <li><Link to="/solutions">Locker Solutions</Link></li>
-              <li><Link to="/">Locker Types</Link></li>
-              <li><Link to="/">About Us</Link></li>
+              <li><Link to="/Products">Locker Types</Link></li>
               <li><Link to="/contact">Contact Us</Link></li>
             </ul>
           </div>
@@ -28,18 +30,18 @@ const Footer = () => {
           <div className="nav-column">
             <h3>Locker Types</h3>
             <ul>
-              <li><Link to="/">Residential</Link></li>
-              <li><Link to="/">Corporate Offices</Link></li>
-              <li><Link to="/">Educational Institutes</Link></li>
-              <li><Link to="/">Gym</Link></li>
-              <li><Link to="/">Malls</Link></li>
+              <li><a href="/Solutions#tabs-section">Residential</a></li>
+              <li><a href="/Solutions#tabs-section">Corporate Offices</a></li>
+              <li><a href="/Solutions#tabs-section">Educational Institutes</a></li>
+              <li><a href="/Solutions#tabs-section">Gym</a></li>
+              <li><a href="/Solutions#tabs-section">Malls</a></li>
             </ul>
           </div>
+
+
           <div className="nav-column">
-            <h3>About Us</h3>
-            <ul>
-              <li><Link to="/">Contact Us</Link></li>
-            </ul>
+            <h3>Socials</h3>
+            
             <div className="social-icons">
               <Link to="/" target="_blank">
                 <FaInstagram />
@@ -51,6 +53,10 @@ const Footer = () => {
                 <FaYoutube />
               </Link>
             </div>
+
+            {/* <h3 className="certified-logos">Lorem ipsum</h3> */}
+            <img className="certified-logos-footer" src={Logos} alt="" srcset="" />
+            
           </div>
         </div>
 

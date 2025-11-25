@@ -1,5 +1,6 @@
 // src/main.jsx
 import React from 'react';
+
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import LockerRoute from './components/LockerRoute'; 
@@ -15,6 +16,7 @@ import Products from './pages/Products.jsx';
 import About from './pages/About.jsx';
 // import VideoLoader from './components/VideoLoader';   // ← NEW
 import './css/loader.css';                           // ← NEW (or put in index.css)
+// import HandleHashScroll from './components/HandleHashScroll.jsx';
 
 // Global Lenis initialization
 const lenis = new Lenis({
@@ -42,6 +44,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       {/* Loader is rendered **outside** the router but still inside root */}
       <VideoLoader />
       <ScrollToTop />
+      {/* <HandleHashScroll /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/solutions" element={<Solutions />} />

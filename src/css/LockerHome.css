@@ -20,7 +20,7 @@
   height:auto;
    position: absolute;
   bottom: 20px;
-  top: 70%;
+  top: 470px;
   left: 51%;
   z-index: 1000;
     transform: translateX(-50%);
@@ -61,7 +61,7 @@
 .head-top-go{
    position: absolute;
   bottom: 20px;
-  top: 5%;
+  top: 3%;
   left: 51%;
   height: fit-content;
   width: 30%;

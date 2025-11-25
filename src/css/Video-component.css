@@ -6,6 +6,13 @@
   position: relative;
   z-index: 100;
 }
+.video-name-text{
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+}
 
 .video-content {
   display: flex;
@@ -47,24 +54,28 @@
 
 .play-pause-btn {
   position: absolute;
-  bottom: 50px;
-  right: 40px;
+  top: 50px;
+  left: 40px;
   background-color: #ffcc00;
   color: #000;
   border: none;
-  width: 50px;
+  width: auto;                /* Allow button to expand */
   height: 50px;
-  border-radius: 50%;
-  font-size: 1.4rem;
+  padding: 0 15px;            /* Add padding */
+  border-radius: 50px;        /* Make pill shape */
+  font-size: 1.2rem;
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px;                  /* Space between icon + text */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
   z-index: 10;
 }
-
+.play-btn-text {
+  font-size: 14px;
+  font-weight: 600;
+}
 .play-pause-btn:hover {
   background-color: #e6b800;
   transform: scale(1.1);
@@ -73,7 +84,7 @@
 @media (max-width: 800px) {
   .video-container {
     padding: 60px 20px 60px 20px;
-    margin-bottom: -110px;
+    /* margin-bottom: -110px; */
 
   }
 
@@ -93,8 +104,9 @@
 
   .play-pause-btn {
     position: absolute;
-    bottom: 20px;
-    right: 15px;
+    top: 20px;
+    left: 20px;
+    width: fit-content;
   }
 
   .demo-video {
