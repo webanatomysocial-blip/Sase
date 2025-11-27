@@ -130,7 +130,7 @@ const LockPassword = () => {
           </div>
 
           <div className="cta-wrapper11111">
-            <Link to="/" className="find-btn">
+            <Link to="/contact" className="find-btn">
               Upgrade Your Facility
               <IoArrowForward className="arrow-icon" />
             </Link>

@@ -40,7 +40,7 @@
   color: rgb(255, 255, 255) !important;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
+  cursor:default ;
   z-index: 1000!important;
   font-size: 25px;
 }

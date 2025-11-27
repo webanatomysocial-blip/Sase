@@ -195,9 +195,9 @@ function LockerHome() {
       <div className="animation-section only-windows " style={{ height: `${animationSectionHeight}px`, position: 'relative' }}>
         <div className="home-banner-overlay" ref={homeoverlay}></div>
         <canvas ref={canvasRef} className="canvas-sticky" />
-        <a ref={buttonRef} className="scroll-button" style={{ color: 'white' }}>
-          Drive Down<span><img src={arrow} alt="" /></span>
-        </a>
+        <p ref={buttonRef} className="scroll-button" style={{ color: 'white' }}>
+          drive down to secure parcel<span><img src={arrow} alt="" /></span>
+        </p>
 
 
         <div className='head-top-go'

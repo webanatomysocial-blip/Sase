@@ -23,7 +23,7 @@ const Business = () => {
               </p>
             </div>
             <div className="cta-section car-section-link">
-              <Link to="/" className="btn-primary">
+              <Link to="/solutions#tabs-section" className="btn-primary">
                 Find Your Solution
                 <IoArrowForward className="btn-primary__arrow" />
               </Link>
@@ -42,7 +42,7 @@ const Business = () => {
               </p>
             </div>
             <div className="cta-section car-section-link">
-              <Link to="/" className="btn-primary">
+              <Link to="/solutions#tabs-section" className="btn-primary">
                 Find Your Solution
                 <IoArrowForward className="btn-primary__arrow" />
               </Link>
@@ -59,7 +59,7 @@ const Business = () => {
               </p>
             </div>
             <div className="cta-section car-section-link">
-              <Link to="/" className="btn-primary">
+              <Link to="/solutions#tabs-section" className="btn-primary">
                 Find Your Solution
                 <IoArrowForward className="btn-primary__arrow" />
               </Link>
@@ -76,7 +76,7 @@ const Business = () => {
               </p>
             </div>
             <div className="cta-section car-section-link">
-              <Link to="/" className="btn-primary">
+              <Link to="/solutions#tabs-section" className="btn-primary">
                 Find Your Solution
                 <IoArrowForward className="btn-primary__arrow" />
               </Link>
@@ -93,7 +93,7 @@ const Business = () => {
               </p>
             </div>
             <div className="cta-section car-section-link">
-              <Link to="/" className="btn-primary">
+              <Link to="/solutions#tabs-section" className="btn-primary">
                 Find Your Solution
                 <IoArrowForward className="btn-primary__arrow" />
               </Link>

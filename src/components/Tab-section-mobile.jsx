@@ -65,7 +65,7 @@ export default function TabsMobile() {
   if (!isMobile) return null;
 
   return (
-    <section className="tabs-only-mobile only-mobile" aria-label="Mobile tabs stacked">
+    <section className="tabs-only-mobile only-mobile" aria-label="Mobile tabs stacked" id="tabs-section" >
 
       {slides.map((s, idx) => (
         <article className="tab-section" key={idx}>

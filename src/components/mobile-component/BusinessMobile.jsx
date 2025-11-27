@@ -10,8 +10,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const BusinessMobile = () => {
+  const navigate = useNavigate();
   const slides = [
     { title: "Residential", img: heroImg },
     { title: "Corporate Offices", img: heroImg2 },
@@ -19,6 +22,18 @@ const BusinessMobile = () => {
     { title: "Gyms", img: heroImg4 },
     { title: "Malls", img: heroImg5 },
   ];
+  const handleIndustryClick = (e) => {
+    e.preventDefault();
+    navigate("/solutions#tabs-section");
+
+    // Force scroll after navigation
+    setTimeout(() => {
+      const element = document.getElementById("tabs-section");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+  };
 
   return (
     <section className="business-section only-mobile">
@@ -34,33 +49,37 @@ const BusinessMobile = () => {
 
       {/* MOBILE SWIPER ONLY */}
       <Swiper
-  modules={[Pagination]}
-  slidesPerView={1}
-  centeredSlides
-  spaceBetween={1}
-  loop
-  pagination={{ 
-    clickable: true,
-    // Optional: customize bullet rendering if needed
-  }}
-  className="custom-swiper"
->
-  {slides.map((slide, idx) => (
-    <SwiperSlide key={idx}>
-      <div
-        className="custom-slide"
-        style={{ backgroundImage: `url(${slide.img})` }}
+        modules={[Pagination]}
+        slidesPerView={1}
+        centeredSlides
+        spaceBetween={1}
+        loop
+        pagination={{
+          clickable: true,
+          // Optional: customize bullet rendering if needed
+        }}
+        className="custom-swiper"
       >
-        <div className="custom-slide__overlay">
-          <h2 className="custom-slide__title">{slide.title}</h2>
-          <div className="custom-slide__arrow">
-            <IoArrowForward />
-          </div>
-        </div>
-      </div>
-    </SwiperSlide>
-  ))}
-</Swiper>
+        {slides.map((slide, idx) => (
+          <SwiperSlide key={idx}>
+            <div
+              className="custom-slide"
+              style={{ backgroundImage: `url(${slide.img})` }}
+            >
+              <a
+                href="/solutions#tabs-section"
+                onClick={handleIndustryClick}
+                className="custom-slide__overlay"
+              >
+                <h2 className="custom-slide__title">{slide.title}</h2>
+                <div className="custom-slide__arrow">
+                  <IoArrowForward />
+                </div>
+              </a>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </section>
   );
 };

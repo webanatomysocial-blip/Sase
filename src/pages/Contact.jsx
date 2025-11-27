@@ -23,18 +23,19 @@ export default function Contact() {
 
         <div className="contact-page-solution-left">
           <div className="contact-page-hero-section-contents">
-            <h1 className="head-text-white">Optimized Delivery and Asset Management for Every Environment.</h1>
+            <h1 className="head-text-white">
+              Get in Touch with SASE — Smart, Secure & Reliable Locker Solutions.
+            </h1>
+
             <p className="para-text-white">
-              Explore how our secure, cloud-connected locker systems are transforming package handling,
-              asset control, and convenience across diverse sectors.
+              Have questions or need assistance? Our team is here to help you with
+              smart locker deployments, integrations, support, or custom solutions.
+              Connect with us and experience seamless, secure, and tech-driven storage solutions.
             </p>
           </div>
 
-          <div className="cta-wrapper-left">
-            <Link to="/" className="find-btn">
-              Find Your Solution <IoArrowForward className="arrow-icon" />
-            </Link>
-          </div>
+
+
         </div>
 
         <div className="contact-page-solution-right">
@@ -95,8 +96,8 @@ export default function Contact() {
                 <a href="https://www.linkedin.com">
                   <img src="https://img.icons8.com/color/40/000000/linkedin.png" alt="linkedin" />
                 </a>
-             
-            </div>
+
+              </div>
             </div>
 
           </div>

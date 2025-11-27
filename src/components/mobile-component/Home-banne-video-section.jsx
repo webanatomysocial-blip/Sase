@@ -51,7 +51,7 @@ export default function HomeBanneVideoSection() {
                 </div>
 
                 <div className="ctaSection">
-                    <Link to="/" className="ctaSection__button">
+                    <Link to="/contact" className="ctaSection__button">
                         Find Your Solution
                         <IoArrowForward className="ctaSection__icon" />
                     </Link>

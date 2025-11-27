@@ -504,7 +504,7 @@ let isMounted = true;
             <div className="left-about-container-inner-one">
              
               <div className="cta-wrapper" style={{ width: "100%" }}>
-                <Link to="/" className="find-btn">
+                <Link to="/contact" className="find-btn">
                   Find Your Solution
                   <IoArrowForward className="arrow-icon" />
                 </Link>

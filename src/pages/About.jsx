@@ -21,7 +21,7 @@ export default function About() {
                         Reliable People. <br /> Remarkable Products.
                     </p>
                     <div className="cta-wrapper-left">
-                        <Link to="/" className="find-btn">
+                        <Link to="/contact" className="find-btn">
                             Find Your Solution <IoArrowForward className="arrow-icon" />
                         </Link>
                     </div>
@@ -72,7 +72,7 @@ At SASE, we redefine the management of deliveries, pickups, and storage. Our int
                     </div>
 
                     <div className="cta-wrapper-left">
-                        <Link to="/" className="find-btn">
+                        <Link to="/contact" className="find-btn">
                             Find Your Solution <IoArrowForward className="arrow-icon" />
                         </Link>
                     </div>

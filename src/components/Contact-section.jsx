@@ -100,7 +100,7 @@ const handleSubmit = async (e) => {
         </div>
 
         {/* Status Message */}
-        {status && <p className="status-message" style={{ color: status.includes("Thank") ? "green" : "red", margin: "10px 0" }}>{status}</p>}
+       
 
         <div className="cta-wrapper-left">
           <button type="submit" ref={sendBtnRef} className="find-btn">
@@ -108,7 +108,11 @@ const handleSubmit = async (e) => {
             <IoArrowForward className="arrow-icon" />
           </button>
         </div>
+
+
+       
       </form>
+        {status && <p className="status-message" style={{ color: status.includes("Thank") ? "green" : "red", margin: "10px 0",paddingLeft:"60px" }}>{status}</p>}
     </section>
   );
 }
