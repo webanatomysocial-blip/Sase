@@ -42,12 +42,14 @@
   height: 4px;
   background: #ffd700;
 }
+.product-card{
+    padding-top: 30px;
+}
 
 /* Centered single product in category */
 .product-card.centered {
   grid-column: 1 / -1;
   justify-self: center;
-  max-width: 600px;
 }
 
 /* Keep your existing .span-2 etc. */

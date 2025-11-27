@@ -24,11 +24,11 @@ const BusinessMobile = () => {
   ];
   const handleIndustryClick = (e) => {
     e.preventDefault();
-    navigate("/solutions#tabs-section");
+    navigate("/solutions#tabs-section-mb");
 
     // Force scroll after navigation
     setTimeout(() => {
-      const element = document.getElementById("tabs-section");
+      const element = document.getElementById("tabs-section-mb");
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
       }
@@ -67,7 +67,7 @@ const BusinessMobile = () => {
               style={{ backgroundImage: `url(${slide.img})` }}
             >
               <a
-                href="/solutions#tabs-section"
+                href="/solutions#tabs-section-mb"
                 onClick={handleIndustryClick}
                 className="custom-slide__overlay"
               >

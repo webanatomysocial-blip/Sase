@@ -1,68 +1,71 @@
 .mobile-about-home-section {
-    padding: 60px 20px;
-    
+  padding: 60px 20px;
 }
 
 .mobile-about-home-container-for-carosule-inner-left {
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
 }
 
 .stright-line-blue {
-    height: 210px;  /* ← MATCH THIS */
-    background-color: #165060;
-    width: 2px;
+  height: 210px;
+  background-color: #165060;
+  width: 2px;
 }
 
 .mobile-about-home-container-for-carosule-inner-right {
-    width: 80%;
-    padding-top: 50px;
+  flex: 1;
+  min-width: 0; /* Critical for Swiper inside flex */
+  padding-top: 50px;
 }
 
 .mobile-about-section-carosule-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .mySwiper1 {
-    width: 100% !important;  /* ← FIXED: 100% not 80% */
-    height: 230px !important; /* ← FIXED: Add height */
-    position: relative;
+  width: 100% !important;
+  height: 230px !important;
+  position: relative;
+  overflow: hidden;
 }
 
 /* ========== PAGINATION - TOP RIGHT ========== */
 .mySwiper1 .swiper-pagination {
-    position: absolute !important;
-    top: 8px !important;
-    right: 8px !important;
-    z-index: 10000000 !important;
-    width: auto !important;
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+  z-index: 10 !important;
+  width: auto !important;
+  display: flex !important;
+  gap: 4px !important;
 }
 
 .mySwiper1 .swiper-pagination-bullet {
-    width: 10px !important;
-    height: 10px !important;
-    background: #fff !important;  /* ← WHITE DOTS */
-    opacity: 0.8 !important;
-    margin: 0 3px !important;
-    border: 2px solid #165060 !important;  /* ← BLUE BORDER */
+  width: 10px !important;
+  height: 10px !important;
+  background: #fff !important; /* ← WHITE DOTS */
+  opacity: 0.8 !important;
+  margin: 0 3px !important;
+  border: 2px solid #165060 !important; /* ← BLUE BORDER */
 }
 
 .mySwiper1 .swiper-pagination-bullet-active {
-    background: #165060 !important;
-    opacity: 1 !important;
-    transform: scale(1.1) !important;
+  background: #165060 !important;
+  opacity: 1 !important;
+  transform: scale(1.1) !important;
 }
 
 .mobile-about-home-container-for-carosule {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
 }

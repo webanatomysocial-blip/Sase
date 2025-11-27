@@ -93,11 +93,11 @@ const Solutions = () => {
       </div>
 
       {/* Make sure Tabs receives the id prop and uses it on a top-level element: */}
-      <Tabs autoplay={true} autoplayInterval={6000} id="tabs-section" />
+      <Tabs autoplay={true} autoplayInterval={6000} />
       <TabsMobile />
 
       {/* CAROUSEL SECTION mobile */}
-      <section className="locker-solution-carousel-section-mobile only-mobile "></section>
+      {/* <section className="locker-solution-carousel-section-mobile only-mobile "></section> */}
 
       <VideoComponent
         background="black"

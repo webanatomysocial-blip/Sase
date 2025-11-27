@@ -141,7 +141,7 @@ const Tabs = ({ autoplay = false, autoplayInterval = 6000 }) => {
                                     </div>
 
                                     <div className="cta-wrapper-left">
-                                        <Link to="/" className="find-btn">
+                                        <Link to="/Products" className="find-btn">
                                             Find Your Solution <IoArrowForward className="arrow-icon" />
                                         </Link>
                                     </div>
