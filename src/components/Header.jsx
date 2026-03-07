@@ -59,15 +59,16 @@ const Header = () => {
 
   return (
     <header
-      className={`header ${isHeaderBlack ? "black-bg" : "transparent-bg"} ${isHeaderHidden ? "hidden" : ""
-        }`}
+      className={`header ${isHeaderBlack ? "black-bg" : "transparent-bg"} ${
+        isHeaderHidden ? "hidden" : ""
+      }`}
       ref={headerRef}
     >
       {/* Logo */}
       <div className="logo-container">
-        <Link to="/" className="logo">
+        <a href="https://app.thesase.tech/login" className="logo">
           <img src={logo} alt="Logo" />
-        </Link>
+        </a>
       </div>
 
       {/* Hamburger icon */}
@@ -78,12 +79,31 @@ const Header = () => {
       {/* Navigation */}
       <nav className={`nav ${isMenuOpen ? "menu-open" : ""}`}>
         <ul className="nav-list">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About Us</Link></li>
-          <li><Link to="/Solutions">Locker Solutions</Link></li>
-          <li><Link to="/Products">Locker Types</Link></li>
-          <li><Link to="/contact">Contact Us</Link></li>
-          <li><a href="https://test.thesase.tech/login">Login</a></li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About Us</Link>
+          </li>
+          <li>
+            <Link to="/Solutions">Locker Solutions</Link>
+          </li>
+          <li>
+            <Link to="/Products">Locker Types</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact Us</Link>
+          </li>
+          <li>
+            <a href="https://app.thesase.tech/login" target="_blank">
+              Login
+            </a>
+          </li>
+          <li>
+            <a href="http://app.thesase.tech/user/register" target="_blank">
+              Signup
+            </a>
+          </li>
         </ul>
 
         <div className="cta-wrapper">

@@ -166,6 +166,7 @@ button {
 
 /*only mobile button start */
 
+
 .ctaSection {
   display: flex;
   position: relative;
@@ -451,6 +452,9 @@ button {
     margin-top: 20px;
     width: 100%;
     flex-direction: row-reverse;
+  }
+  .ctaSection{
+    margin-top: 60px;
   }
 
   .transparent-bg .hamburger {

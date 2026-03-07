@@ -1,14 +1,13 @@
-import React, { useRef, useEffect, useState } from 'react';
-import Lenis from '@studio-freight/lenis';
-import '../css/LockerHome.css';
-import { SlArrowDown } from 'react-icons/sl';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-import arrow from '../assets/Home-images/Extra-images/arrow.gif';
-import VariableProximity from './VariableProximity';
-import Logos from '../assets/Home-images/Logo-01.png';
-
+import React, { useRef, useEffect, useState } from "react";
+import Lenis from "@studio-freight/lenis";
+import "../css/LockerHome.css";
+import { SlArrowDown } from "react-icons/sl";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import arrow from "../assets/Home-images/Extra-images/arrow.gif";
+import VariableProximity from "./VariableProximity";
+import Logos from "../assets/Home-images/Logo-01.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,11 +25,17 @@ function LockerHome() {
   const homeoverlay = useRef(null);
 
   // Generate image path
-  const imageModules = import.meta.glob('/src/assets/Home-images/Squence-images/locker_01_*.webp', { eager: true });
+  const imageModules = import.meta.glob(
+    "/src/assets/Home-images/Squence-images/locker_01_*.webp",
+    { eager: true }
+  );
   const getFramePath = (frame) => {
-    const paddedFrame = String(frame).padStart(4, '0');
-    const module = imageModules[`/src/assets/Home-images/Squence-images/locker_01_${paddedFrame}.webp`];
-    return module ? module.default : '';
+    const paddedFrame = String(frame).padStart(4, "0");
+    const module =
+      imageModules[
+        `/src/assets/Home-images/Squence-images/locker_01_${paddedFrame}.webp`
+      ];
+    return module ? module.default : "";
   };
 
   // Preload images
@@ -55,7 +60,7 @@ function LockerHome() {
         drawFrame(1);
       };
     }
-  },);
+  });
 
   // Initialize Lenis
   useEffect(() => {
@@ -86,7 +91,7 @@ function LockerHome() {
     const canvas = canvasRef.current;
     if (!canvas || !images.current[frame]?.complete) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     const img = images.current[frame];
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -124,17 +129,17 @@ function LockerHome() {
   // Lenis scroll listener + resize
   useEffect(() => {
     const lenis = lenisRef.current;
-    if (lenis) lenis.on('scroll', handleScroll);
+    if (lenis) lenis.on("scroll", handleScroll);
 
     const handleResize = () => {
       updateCanvasSize();
       drawFrame(currentFrame);
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      if (lenis) lenis.off('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
+      if (lenis) lenis.off("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
     };
   }, [handleScroll, currentFrame]);
 
@@ -143,38 +148,38 @@ function LockerHome() {
     // 1. BUTTON FADES OUT ON SCROLL DOWN (existing)
     ScrollTrigger.create({
       trigger: document.documentElement,
-      start: 'top top',
+      start: "top top",
       onUpdate: (self) => {
         gsap.to(buttonRef.current, {
           opacity: self.progress > 0 ? 0 : 1,
           duration: 0.5,
-          ease: 'power2.out',
+          ease: "power2.out",
         });
         gsap.to(containerRef.current, {
           opacity: self.progress > 0 ? 0 : 1,
           duration: 0.5,
-          ease: 'power2.out',
+          ease: "power2.out",
         });
         gsap.to(bannerimgRef.current, {
           opacity: self.progress > 0 ? 0 : 1,
           duration: 0.5,
-          ease: 'power2.out',
+          ease: "power2.out",
         });
       },
     });
 
     // 2. NEW: Fade overlay to black when About section enters
-    const aboutSection = document.querySelector('.about-us-section');
+    const aboutSection = document.querySelector(".about-us-section");
     const overlay = homeoverlay.current;
 
     if (aboutSection && overlay) {
       gsap.to(overlay, {
-        backgroundColor: '#FFF5EA', 
-        ease: 'none',
+        backgroundColor: "#FFF5EA",
+        ease: "none",
         scrollTrigger: {
           trigger: aboutSection,
-          start: 'top 100%',
-          end: 'top 40%',
+          start: "top 100%",
+          end: "top 40%",
           scrub: true,
           // markers: true,
         },
@@ -182,39 +187,44 @@ function LockerHome() {
     }
   }, [homeoverlay]); // re-run if ref changes
 
-
-
   const containerRef = useRef(null);
-
-
-
 
   return (
     <>
       {/* ANIMATION SECTION */}
-      <div className="animation-section only-windows " style={{ height: `${animationSectionHeight}px`, position: 'relative' }}>
+      <div
+        className="animation-section only-windows "
+        style={{ height: `${animationSectionHeight}px`, position: "relative" }}
+      >
         <div className="home-banner-overlay" ref={homeoverlay}></div>
         <canvas ref={canvasRef} className="canvas-sticky" />
-        <p ref={buttonRef} className="scroll-button" style={{ color: 'white' }}>
-          drive down to secure parcel<span><img src={arrow} alt="" /></span>
+        <p ref={buttonRef} className="scroll-button" style={{ color: "white" }}>
+          Drive Down to Secure Parcel
+          <span>
+            <img src={arrow} alt="" />
+          </span>
         </p>
 
-
-        <div className='head-top-go'
-          ref={containerRef}
-        >
+        <div className="head-top-go" ref={containerRef}>
           <VariableProximity
-            label={' "Simplify logistics, secure deliveries, and empower your property with SASE." '}
-            className={'head-top-go big-head-text-white'}
+            label={
+              ' "Simplify logistics, secure deliveries, and empower your property with SASE." '
+            }
+            className={"head-top-go big-head-text-white"}
             fromFontVariationSettings="'wght' 400, 'opsz' 9"
             toFontVariationSettings="'wght' 1000, 'opsz' 40"
             containerRef={containerRef}
             radius={100}
-            falloff='linear'
+            falloff="linear"
           />
         </div>
       </div>
-        <img src={Logos} alt="Logo" className="logo-image-home-banner only-windows" ref={bannerimgRef} />
+      <img
+        src={Logos}
+        alt="Logo"
+        className="logo-image-home-banner only-windows"
+        ref={bannerimgRef}
+      />
 
       {/* ABOUT US SECTION */}
       {/* <AboutSection ref={aboutUsSectionRef} /> */}

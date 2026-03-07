@@ -11,49 +11,63 @@ import a3 from "../assets/Products-image/a/1-min.png";
 import a2 from "../assets/Products-image/a/2-min.png";
 import a1 from "../assets/Products-image/Revised/1-01.png";
 import a4 from "../assets/Products-image/a/4-min.png";
+import a5 from "../assets/Products-image/a/5-min.png";
+
 
 // B Folder
 import b3 from "../assets/Products-image/b/1-min.png";
 import b2 from "../assets/Products-image/b/2-min.png";
 import b1 from "../assets/Products-image/Revised/1-06.png";
 import b4 from "../assets/Products-image/b/4-min.png";
+import b5 from "../assets/Products-image/b/5-min.png";
+
 
 // C Folder
 import c3 from "../assets/Products-image/c/1-min.png";
 import c2 from "../assets/Products-image/c/2-min.png";
 import c1 from "../assets/Products-image/Revised/1.png";
 import c4 from "../assets/Products-image/c/4-min.png";
+import c5 from "../assets/Products-image/c/5-min.png";
+
 
 // D Folder
 import d3 from "../assets/Products-image/d/1-min.png";
 import d2 from "../assets/Products-image/d/2-min.png";
 import d1 from "../assets/Products-image/Revised/3.png";
 import d4 from "../assets/Products-image/d/4-min.png";
+import d5 from "../assets/Products-image/d/5-min.png";
+
 
 // E Folder
 import e3 from "../assets/Products-image/e/1-min.png";
 import e2 from "../assets/Products-image/e/2-min.png";
 import e1 from "../assets/Products-image/Revised/2.png";
 import e4 from "../assets/Products-image/e/4-min.png";
+import e5 from "../assets/Products-image/e/5-min.png";
+
 
 // F Folder
 import f3 from "../assets/Products-image/f/1-min.png";
 import f2 from "../assets/Products-image/f/2-min.png";
 import f1 from "../assets/Products-image/Revised/4.png";
 import f4 from "../assets/Products-image/f/4-min.png";
+import f5 from "../assets/Products-image/f/5-min.png";
+
 
 // G Folder
 import g3 from "../assets/Products-image/g/1-min.png";
 import g2 from "../assets/Products-image/g/2-min.png";
 import g1 from "../assets/Products-image/Revised/5.png";
 import g4 from "../assets/Products-image/g/4-min.png";
+import g5 from "../assets/Products-image/g/5-min.png";
+
 
 const COLOR_PALETTE = {
   Green: "#1D2E28 ",
   Brown: "#231512 ",
   Black: "#000000",
   Blue: "#000116 ",
-  Beige: "#F5F5DC",
+  Beige: "#B3926f",
 };
 
 const ProductsList = () => {
@@ -73,7 +87,7 @@ const ProductsList = () => {
             Brown: a2,
             Black: a3,
             Blue: a4,
-            Beige: a4,
+            Beige: a5,
           },
           colors: ["Green", "Brown", "Black", "Blue", "Beige"],
           backgroundColor: "#FFF5EA",
@@ -89,7 +103,7 @@ const ProductsList = () => {
             Brown: b2,
             Black: b3,
             Blue: b4,
-            Beige: b4,
+            Beige: b5,
           },
           colors: ["Green", "Brown", "Black", "Blue", "Beige"],
         },
@@ -108,7 +122,7 @@ const ProductsList = () => {
             Brown: d2,
             Black: d3,
             Blue: d4,
-            Beige: d4,
+            Beige: d5,
           },
           colors: ["Green", "Brown", "Black", "Blue", "Beige"],
         },
@@ -123,7 +137,7 @@ const ProductsList = () => {
             Brown: g2,
             Black: g3,
             Blue: g4,
-            Beige: g4,
+            Beige: g5,
           },
           colors: ["Green", "Brown", "Black", "Blue", "Beige"],
           backgroundColor: "#FFF5EA",
@@ -144,7 +158,7 @@ const ProductsList = () => {
             Brown: c2,
             Black: c3,
             Blue: c4,
-            Beige: c4,
+            Beige: c5,
           },
           colors: ["Green", "Brown", "Black", "Blue", "Beige"],
           backgroundColor: "#FFF5EA",
@@ -159,7 +173,7 @@ const ProductsList = () => {
             Brown: f2,
             Black: f3,
             Blue: f4,
-            Beige: f4,
+            Beige: f5,
           },
           colors: ["Green", "Brown", "Black", "Blue", "Beige"],
         },
@@ -178,7 +192,7 @@ const ProductsList = () => {
             Brown: e2,
             Black: e3,
             Blue: e4,
-            Beige: e4,
+            Beige: e5,
           },
           colors: ["Green", "Brown", "Black", "Blue", "Beige"],
         },

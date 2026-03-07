@@ -4,12 +4,14 @@ import BannerPoster from '../../assets/Home-images/Squence-images/locker_01_0001
 import '../../css/mobile-css/HomeBanneVideoSection.css';
 import { Link } from 'react-router-dom';
 import { IoArrowForward } from "react-icons/io5";
+import Logos from "../../assets/Home-images/Logo-01.png";
+
 
 export default function HomeBanneVideoSection() {
     const videoRef = useRef(null);
 
     useEffect(() => {
-        const video = videoRef.current;
+        const video = videoRef.current;``
         if (!video) return;
 
         const handleEnded = () => {
@@ -49,6 +51,11 @@ export default function HomeBanneVideoSection() {
                         Select your industry to see how our smart lockers can revolutionize your operations.
                     </p>
                 </div>
+                   <img className="logo-image-home-banner-mobile"
+        src={Logos}
+        alt="Logo"
+        className="logo-image-home-banner"
+      />
 
                 <div className="ctaSection">
                     <Link to="/contact" className="ctaSection__button">
