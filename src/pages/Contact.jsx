@@ -48,16 +48,6 @@ export default function Contact() {
               </a>
             </div>
             <div className="contact-map-section-contents-left-inner">
-              <h1 className="head-text">Our Location</h1>
-              <p className="para-text">
-                Haksons Villas, 8-2-404, Road No.6, Green Valley, Banjara Hills,
-                Hyderabad, Telangana 500034
-              </p>
-            </div>
-          </div>
-
-          <div className="contact-map-section-contents-left-outer">
-            <div className="contact-map-section-contents-left-inner">
               <h1 className="head-text">Email</h1>
               <a className="para-text" href="mailto:parceldropnetworks@gmail">
                 parceldropnetworks@gmail.com
@@ -79,17 +69,67 @@ export default function Contact() {
               </div>
             </div>
           </div>
+
+          <div className="contact-map-section-contents-left-outer">
+            <div className="contact-map-section-contents-left-inner">
+              <h1 className="head-text">Manufacturers Location</h1>
+              <p className="para-text">
+                Hexive Technologies pvt Ltd<br/>
+                49, Phase III, IOCL, Cherlapalli, Secunderabad, Telangana 500051
+              </p>
+              <div className="mobile-map-container">
+                <iframe
+                  src="https://maps.google.com/maps?q=Hexive+Technologies+pvt+Ltd+49,+Phase+III,+IOCL,+Cherlapalli,+Secunderabad,+Telangana+500051&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Manufacturers Location Map Mobile"
+                ></iframe>
+              </div>
+            </div>
+            <div className="contact-map-section-contents-left-inner">
+              <h1 className="head-text">Warehouse Location</h1>
+              <p className="para-text">
+                154, Chengicherla Village, Medipally Mandal, Medchal-malkajgiri district, Telangana
+              </p>
+              <div className="mobile-map-container">
+                <iframe
+                  src="https://maps.google.com/maps?q=154,+Chengicherla+Village,+Medipally+Mandal,+Medchal-malkajgiri+district,+Telangana&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Warehouse Location Map Mobile"
+                ></iframe>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="contact-map-section-contents-right">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d121796.99812957812!2d78.35156479999999!3d17.4522368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3bcb977ccdabaddd%3A0x197148ae9648cfe2!2sCCCV%2BJC%20Haksons%20Villas%2C%208-2-404%2C%20Road%20No.6%2C%20Green%20Valley%2C%20Banjara%20Hills%2C%20Hyderabad%2C%20Telangana%20500034!3m2!1d17.4216145!2d78.44361239999999!5e0!3m2!1sen!2sin!4v1763532130140!5m2!1sen!2sin"
-            style={{ border: 0 }} // ← Object, not string
-            allowFullScreen="" // ← camelCase
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="sase map" // ← Recommended for accessibility
-          ></iframe>
+          <div className="map-container">
+            <h2 className="map-title">Manufacturers</h2>
+            <iframe
+              src="https://maps.google.com/maps?q=Hexive+Technologies+pvt+Ltd+49,+Phase+III,+IOCL,+Cherlapalli,+Secunderabad,+Telangana+500051&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Manufacturers Location Map"
+            ></iframe>
+          </div>
+          <div className="map-container">
+            <h2 className="map-title">Warehouse</h2>
+            <iframe
+              src="https://maps.google.com/maps?q=154,+Chengicherla+Village,+Medipally+Mandal,+Medchal-malkajgiri+district,+Telangana&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Warehouse Location Map"
+            ></iframe>
+          </div>
         </div>
       </section>
 
