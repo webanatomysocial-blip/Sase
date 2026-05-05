@@ -19,6 +19,8 @@ import "./css/loader.css"; // ← NEW (or put in index.css)
 import HandleHashScroll from "./components/HandleHashScroll.jsx";
 import ComingSoon from "./pages/Coming-Soon.jsx";
 
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+
 // Global Lenis initialization
 const lenis = new Lenis({
   duration: 1,
@@ -53,6 +55,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<ComingSoon />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

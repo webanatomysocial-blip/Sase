@@ -50,7 +50,7 @@ export default function HomeBanneVideoSection() {
             your operations.
           </p>
         </div>
-        <img className="logo-image-home-banner-mobile" src={Logos} alt="Logo" />
+        <img className="logo-image-home-banner" src={Logos} alt="Logo" />
 
         <div className="ctaSection">
           <Link to="/contact" className="ctaSection__button">

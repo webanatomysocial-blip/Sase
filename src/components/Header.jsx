@@ -66,9 +66,9 @@ const Header = () => {
     >
       {/* Logo */}
       <div className="logo-container">
-        <a href="https://app.thesase.tech/login" className="logo">
+        <Link to="/" className="logo">
           <img src={logo} alt="Logo" />
-        </a>
+        </Link>
       </div>
 
       {/* Hamburger icon */}
